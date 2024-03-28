@@ -1,4 +1,9 @@
-const { userZodSignin } = require("../models/zodModel");
+const zod = require("zod");
+
+const userZodSignin = zod.object({
+  email: zod.string().email(),
+  password: zod.string().min(6),
+});
 
 function signInMiddleware(req, res, next) {
   try {

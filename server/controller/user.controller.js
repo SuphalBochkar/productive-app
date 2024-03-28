@@ -1,13 +1,10 @@
 const express = require("express");
-const router = express.Router();
+// const router = express.Router();
 
-const { signUpMiddleware } = require("../middleware/signup");
-const { signInMiddleware } = require("../middleware/signin");
 const { generateTokenCookie } = require("../utils/generateTokenCookie");
-
 const userDB = require("../models/userModel");
 
-router.post("/signup", signUpMiddleware, async (req, res) => {
+const signup = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
@@ -34,9 +31,9 @@ router.post("/signup", signUpMiddleware, async (req, res) => {
     console.log("Error at SIGNUP: ", error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
-});
+};
 
-router.post("/signin", signInMiddleware, async (req, res) => {
+const signin = async (req, res) => {
   try {
     const user = await userDB.findOne({
       email: req.body.email,
@@ -65,9 +62,9 @@ router.post("/signin", signInMiddleware, async (req, res) => {
     console.log("Error at SIGNIN: ", error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
-});
+};
 
-router.post("/signout", (req, res) => {
+const signout = (req, res) => {
   try {
     res.cookie("jwt", "", { maxAge: 0 });
     res.status(200).json({ msg: "Logged out successfully" });
@@ -75,6 +72,7 @@ router.post("/signout", (req, res) => {
     console.log("Error at LOGOUT: ", error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
-});
+};
 
-module.exports = router;
+// module.exports = router;
+module.exports = { signup, signin, signout };

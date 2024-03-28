@@ -1,10 +1,16 @@
+const zod = require("zod");
 const userDB = require("../models/userModel");
-const { userZodSignup } = require("../models/zodModel");
+
+const userZodSignup = zod.object({
+  username: zod.string(),
+  email: zod.string(),
+  password: zod.string(),
+  confirmPassword: zod.string(),
+});
 
 function signUpMiddleware(req, res, next) {
   try {
     console.log(req.body);
-
     const response = userZodSignup.safeParse(req.body);
     if (!response.success) {
       return res.status(411).json({
