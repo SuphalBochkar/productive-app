@@ -9,8 +9,6 @@ const taskTypeSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
-    // default: "other",
   },
 });
 

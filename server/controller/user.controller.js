@@ -1,6 +1,3 @@
-const express = require("express");
-// const router = express.Router();
-
 const { generateTokenCookie } = require("../utils/generateTokenCookie");
 const userDB = require("../models/userModel");
 
@@ -74,5 +71,19 @@ const signout = (req, res) => {
   }
 };
 
+const getUsers = async (req, res) => {
+  try {
+    const loggedInUserId = req.user._id;
+    const allUsers = await userDB
+      .find({ _id: { $ne: loggedInUserId } })
+      .select("_id username email profilePic");
+    res.status(200).json(allUsers);
+  } catch (error) {
+    console.log("Error in getUsers controller:", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+
 // module.exports = router;
-module.exports = { signup, signin, signout };
+module.exports = { signup, signin, signout, getUsers };
