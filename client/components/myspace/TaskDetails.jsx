@@ -7,10 +7,10 @@ const TaskDetails = ({ label, des }) => {
   return (
     <div className="p-4">
       <h3>Task Details</h3>
-      <div className="border p-4 rounded-lg">
-        <h6>My Work Task</h6>
-        <h3>{label}</h3>
-        <p>{des}</p>
+      <div className="border p-4 rounded-lg m-1">
+        <h6 className="mb-3 text-gray-400 font-semibold">My Work Task</h6>
+        <h3 className="mb-3">{label}</h3>
+        <p className="mb-8">{des}</p>
         <TaskDetailsInfo title={"TimeLine"} label={"22 April 2024"} />
         <TaskDetailsInfo title={"Time"} label={"22 April 2024"} />
         <TaskDetailsInfo title={"Assigne"} label={"22 April 2024"} />

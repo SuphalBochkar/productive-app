@@ -1,12 +1,20 @@
 const zod = require("zod");
 const userDB = require("../models/userModel");
 
-const userZodSignup = zod.object({
-  username: zod.string(),
-  email: zod.string(),
-  password: zod.string(),
-  confirmPassword: zod.string(),
-});
+const userZodSignup = zod
+  .object({
+    username: zod.string(),
+    email: zod.string(),
+    password: zod
+      .string()
+      .min(6, "The password must be at least 6 characters long")
+      .max(32, "The password must be a maximum of 32 characters"),
+    confirmPassword: zod.string(),
+  })
+  .refine((fields) => fields.password === fields.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Passwords don't match",
+  });
 
 function signUpMiddleware(req, res, next) {
   try {
@@ -14,16 +22,11 @@ function signUpMiddleware(req, res, next) {
     const response = userZodSignup.safeParse(req.body);
     if (!response.success) {
       return res.status(411).json({
-        msg: "Incorrect Inputs",
+        msg: response.error.issues[0].message,
       });
     }
 
     const { email, password, confirmPassword } = req.body;
-    if (password !== confirmPassword) {
-      return res.status(411).json({
-        msg: "Password and confirm password do not match",
-      });
-    }
 
     userDB.findOne({ email: email }).then((value) => {
       if (value) {

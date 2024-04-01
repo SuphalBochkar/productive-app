@@ -3,8 +3,8 @@ import React from "react";
 const TaskDetailsInfo = ({ title, label }) => {
   return (
     <div className="flex">
-      <div className="w-[25%]">{title}</div>
-      <div className="w-[75%]">{label}</div>
+      <div className="w-[40vw] text-xl">{title}</div>
+      <div className="w-[70vw]">{label}</div>
     </div>
   );
 };

@@ -14,11 +14,12 @@ const signup = async (req, res) => {
     });
 
     if (newUser) {
-      generateTokenCookie(newUser._id, res);
+      req.token = generateTokenCookie(newUser._id, res);
       await newUser.save();
 
+      console.log(req.token);
       res.json({
-        msg: "Signed in Successfully",
+        msg: "Signed up Successfully",
         token: req.token,
       });
     } else {
@@ -83,7 +84,6 @@ const getUsers = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
 
 // module.exports = router;
 module.exports = { signup, signin, signout, getUsers };

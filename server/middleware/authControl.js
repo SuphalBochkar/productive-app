@@ -5,6 +5,7 @@ const userDB = require("../models/userModel");
 
 const authMiddleware = async (req, res, next) => {
   try {
+    console.log(req); // Debugging statement
     const token = req.cookies.jwt;
     console.log("Token:", token); // Debugging statement
 
