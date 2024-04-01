@@ -1,6 +1,6 @@
 import React from "react";
-import LeftSignup from "../components/LeftSignup";
-import RightSignup from "../components/RightSignup";
+import LeftSignup from "../components/sign/LeftSignup";
+import RightSignup from "../components/sign/RightSignup";
 
 const Signup = () => {
   return (

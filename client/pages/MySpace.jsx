@@ -1,37 +1,29 @@
 import React from "react";
-import axios from "axios"; // Import axios
-import toast from "react-hot-toast";
-import { useAuthContext } from "../context/AuthContext.jsx";
-import { useNavigate } from "react-router-dom";
+import Rightmain from "../components/myspace/Rightmain";
+import Sidebar from "../components/myspace/Sidebar";
+import TaskDetails from "../components/myspace/TaskDetails";
 
-const MySpace = () => {
-  const { setAuthUser } = useAuthContext();
-  const navigate = useNavigate();
-
-  const signout = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/api/v1/user/signout"
-      );
-      localStorage.removeItem("jwt");
-      toast.success("Logged out successfully");
-      setAuthUser(null);
-      navigate("/signin");
-    } catch (error) {
-      if (error.response) {
-        toast.error(error.response.data.message || "An error occurred", {
-          duration: 600,
-        });
-      }
-    }
-  };
-
+const Myspace = () => {
   return (
-    <div>
-      <div>MySpace</div>
-      <button onClick={signout}>Logout</button>
+    <div className="h-full flex">
+      <div className="font-AlbertSans w-[15vw] left-0 top-0 fixed h-full bg-[#f3f4f6]">
+        <Sidebar />
+      </div>
+      <div className="w-[60vw] left-0 top-0 ml-[15vw] h-full">
+        <Rightmain />
+      </div>
+      <div>
+        <div className="w-[25vw] border border-l-2 h-screen fixed">
+          <TaskDetails
+            label={"Documneting on github"}
+            des={
+              "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis pariatur quidem earum nobis adipisci magni et facilis laudantium, aliquid fuga?"
+            }
+          />
+        </div>
+      </div>
     </div>
   );
 };
 
-export default MySpace;
+export default Myspace;

@@ -8,12 +8,13 @@ import { useAuthContext } from "../context/AuthContext";
 import Signup from "../pages/Signup";
 import Signin from "../pages/Signin";
 import MySpace from "../pages/MySpace";
+import Test from "../pages/Test";
 
 function App() {
   const { authUser } = useAuthContext();
 
   return (
-    <div>
+    <>
       <Routes>
         <Route
           path="/"
@@ -33,9 +34,10 @@ function App() {
           path="/signup"
           element={authUser ? <Navigate to="/myspace" /> : <Signup />}
         />
+        <Route path="/test" element={<Test />} />
       </Routes>
       <Toaster />
-    </div>
+    </>
   );
 }
 

@@ -14,6 +14,8 @@ export default {
         ibm: ["IBM Plex Sans"],
         satoshi: ["satoshi"],
         varRound: ["Varela Round"],
+        AlbertSans: ["Albert Sans"],
+        JetBrains: ["JetBrains Mono"],
       },
       colors: {
         inputColor: "#ebf0f7",

@@ -1,6 +1,6 @@
 import React from "react";
-import RightSignin from "../components/RightSignin";
-import LeftSignin from "../components/LeftSignin";
+import RightSignin from "../components/sign/RightSignin";
+import LeftSignin from "../components/sign/LeftSignin";
 
 const Signin = () => {
   return (
