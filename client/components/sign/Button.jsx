@@ -5,6 +5,7 @@ const Button = ({ label, icon, click }) => {
     <div className="mt-4">
       <button
         type="button"
+        onClick={click}
         className="py-2.5 px-5 text-[0.8vw] w-full font-semibold text-gray-900 focus:outline-none bg-gray-50 rounded-lg border border-gray-300 focus:z-10 flex items-center gap-2 justify-center"
       >
         {icon && (

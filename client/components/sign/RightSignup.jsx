@@ -20,7 +20,7 @@ const RightSignup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const { loading, setSignup } = useSignup;
+  const { loading, setSignup } = useSignup();
 
   const handleChange = (e, inputType) => {
     const value = e.target.value;
@@ -35,18 +35,14 @@ const RightSignup = () => {
     }
   };
 
-  const clicko = () => {
-    console.log(username, email, password, confirmPassword);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await setSignup(username, email, password, confirmPassword, setError);
   };
 
   return (
     <div className="h-full flex justify-start">
       <div className="flex flex-col justify-around">
-        <div>
-          <Logo />
-          <Loader size="md" speed="normal" />
-          <button onClick={clicko}>Clicko</button>
-        </div>
         <div>
           <Heading label={"Hearty Welcome"} />
           <SubHeading label={"Create your new account"} />
@@ -73,7 +69,7 @@ const RightSignup = () => {
             holder={"Confirm your password *"}
             change={(e) => handleChange(e, "conPassword")}
           />
-          <Button label={"Sign Up"} load={loading} />
+          <Button label={"Sign Up"} load={loading} click={handleSubmit} />
           <Button
             label={"Continue with Google"}
             icon={<GoogleIcon />}

@@ -1,12 +1,23 @@
 import React from "react";
 
 const Sideprofile = ({ label, icon }) => {
+  // Function to convert string to title case
+  const toTitleCase = (str) => {
+    return str.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  };
+
   return (
     <div className="px-3 py-3 cursor-pointer flex items-center rounded-xl border text-2xl bg-white">
-      <div className="flex justify-center items-center border-0 w-9 h-9 rounded-xl">
-        <img src={icon} alt="" className="h-5  inline-block align-middle " />
+      <div className="flex justify-center items-center border-0 w-15 h-15 rounded-xl">
+        <img
+          src={icon}
+          alt=""
+          className="h-10 w-10 inline-block align-middle "
+        />
       </div>
-      <div className="tracking-normal font-semibold">{label}</div>
+      <div className="tracking-normal font-semibold">{toTitleCase(label)}</div>
     </div>
   );
 };

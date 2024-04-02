@@ -1,10 +1,10 @@
+const router = require("express").Router();
 const {
   sendMessage,
   getMessages,
 } = require("../controller/messages.controller");
-const authMiddleware = require("../middleware/authControl");
 
-const router = require("express").Router();
+router.get("/:id", getMessages);
+router.post("/send/:id", sendMessage);
 
-router.post("/:id", authMiddleware, getMessages);
-router.post("/send/:id", authMiddleware, sendMessage);
+module.exports = router;

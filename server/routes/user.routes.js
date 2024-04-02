@@ -6,6 +6,7 @@ const {
   signin,
   signout,
   getUsers,
+  detailsOfUser,
 } = require("../controller/user.controller");
 const { signUpMiddleware } = require("../middleware/signup");
 const { signInMiddleware } = require("../middleware/signin");
@@ -15,6 +16,7 @@ const router = express.Router();
 router.post("/signup", signUpMiddleware, signup);
 router.post("/signin", signInMiddleware, signin);
 router.post("/signout", signout);
-router.get("/all", authMiddleware, getUsers);
+router.get("/users", authMiddleware, getUsers);
+router.get("/me", authMiddleware, detailsOfUser);
 
 module.exports = router;

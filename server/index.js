@@ -19,7 +19,6 @@ app.use(cookieParser());
 // );
 
 app.use(cors());
-
 app.use("/api/v1", mainRouter);
 
 app.listen(port, async () => {

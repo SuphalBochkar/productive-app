@@ -9,6 +9,8 @@ import Signup from "../pages/Signup";
 import Signin from "../pages/Signin";
 import MySpace from "../pages/MySpace";
 import Test from "../pages/Test";
+import TempSignout from "../pages/TempSignout";
+import UserChat from "../pages/UserChat";
 
 function App() {
   const { authUser } = useAuthContext();
@@ -35,6 +37,8 @@ function App() {
           element={authUser ? <Navigate to="/myspace" /> : <Signup />}
         />
         <Route path="/test" element={<Test />} />
+        <Route path="/signout" element={<TempSignout />} />
+        <Route path="/chat" element={<UserChat />} />
       </Routes>
       <Toaster />
     </>

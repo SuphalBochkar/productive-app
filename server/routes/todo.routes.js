@@ -22,8 +22,8 @@ const {
 // api/v1/todo/
 router.get("/all", getTodo);
 router.post("/add", addTaskTypeMiddleware, addTodo);
-router.post("/update/:id", addTaskTypeMiddleware, updateTodo);
-router.post("/delete/:id", deleteTodo);
+router.put("/update/:id", addTaskTypeMiddleware, updateTodo);
+router.delete("/delete/:id", deleteTodo);
 
 router.get("/single/:id", getSingleTodo);
 router.post("/complete/:id", completeTodo);
