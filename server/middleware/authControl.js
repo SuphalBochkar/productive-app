@@ -5,8 +5,8 @@ const userDB = require("../models/userModel");
 
 const authMiddleware = async (req, res, next) => {
   try {
-    console.log(req); // Debugging statement
-    const token = req.cookies.jwt;
+    // const token = req.cookies.jwt;
+    const token = req.headers.authorization; // Get the token from request headers
     console.log("Token:", token); // Debugging statement
 
     if (!token) {
@@ -15,7 +15,8 @@ const authMiddleware = async (req, res, next) => {
         .json({ message: "Unauthorized Access: No Token Provided" });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    // const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token.split(" ")[1], process.env.JWT_SECRET); // Split the token to remove "Bearer"
     console.log("Decoded:", decoded); // Debugging statement
 
     if (!decoded) {

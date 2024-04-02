@@ -7,7 +7,7 @@ import atta from "../../src/assets/attachment.svg";
 
 const Todocomp = ({ name }) => {
   return (
-    <div className="flex hover:bg-oran-700 font-AlbertSans p-2 mx-6 my-5 border-2 border-gray-200 border-solid rounded-xl">
+    <div className="flex hover:bg-oran-700 font-AlbertSans p-2 mx-6 my-5 border-2 border-gray-200 border-solid rounded-xl hover:transition hover:delay-60 hover:bg-[#6161ff] hover:text-white">
       <div className="m-2 pt-0.5">
         <label className="inline-flex items-center">
           <input
@@ -17,14 +17,14 @@ const Todocomp = ({ name }) => {
         </label>
       </div>
       <div>
-        <div id="check" className="my-1 ">
+        <div id="check" className="my-1">
           <h2 className="font-medium text-2xl">{name}</h2>
         </div>
         <div className="flex gap-3 my-3">
           <Todoinfo label={"5"} svg={atta} />{" "}
-          <span className="text-[#aeafaf]">•</span>
+          <span className="text-inherit">•</span>
           <Todoinfo label={"12"} svg={comm} />{" "}
-          <span className="text-[#aeafaf]">•</span>
+          <span className="text-inherit">•</span>
           <Todoinfo label={"22 Jan 2023"} svg={cal} />
         </div>
         <div className="">

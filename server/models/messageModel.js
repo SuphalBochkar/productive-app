@@ -1,4 +1,6 @@
-import mongoose from "mongoose";
+console.log("message");
+
+const mongoose = require("mongoose");
 
 const messageSchema = new mongoose.Schema(
   {
@@ -24,4 +26,4 @@ const messageSchema = new mongoose.Schema(
 );
 
 const messagesDB = mongoose.model("messages", messageSchema);
-export default messagesDB;
+module.exports = messagesDB;

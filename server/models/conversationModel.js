@@ -1,4 +1,6 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
+
+console.log("conversation");
 
 const conversationSchema = new mongoose.Schema(
   {
@@ -20,4 +22,4 @@ const conversationSchema = new mongoose.Schema(
 );
 
 const conversationsDB = mongoose.model("conversations", conversationSchema);
-export default conversationsDB;
+module.exports = conversationsDB;
