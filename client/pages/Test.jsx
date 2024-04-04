@@ -2,10 +2,11 @@ import React from "react";
 import DoneTodo from "../components/myspace/DoneTodo";
 import TaskDetails from "../components/myspace/TaskDetails";
 import Todocomp from "../components/myspace/Todocomp";
+import SubscriptionInfo from "../components/myspace/SubscriptionInfo";
 
 const Test = () => {
   return (
-    <div>
+    <div className="bg-[#f3f4f6]">
       {/* <DoneTodo label={"Done with Gym"} /> */}
       {/* <TaskDetails
         label={"Commenting on Github"}
@@ -13,7 +14,8 @@ const Test = () => {
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, nobis."
         }
       /> */}
-      <Todocomp name={"Done with the gym"}/>
+      {/* <Todocomp name={"Done with the gym"}/> */}
+      <SubscriptionInfo />
     </div>
   );
 };

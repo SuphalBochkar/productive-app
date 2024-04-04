@@ -1,6 +1,7 @@
 import React from "react";
 import circleplus from "../../src/assets/circleplus.svg";
 import Currentdate from "./Currentdate";
+import { IoMdAddCircleOutline } from "react-icons/io";
 
 const MainHeading = () => {
   return (
@@ -35,8 +36,9 @@ const MainHeading = () => {
         </div>
       </div>
       <div className="flex items-center justify-center">
-        <button className="h-10 font-AlbertSans border-0 px-4 py-6  font-medium text-xl flex justify-center items-center gap-1 text-white bg-[#6161ff] rounded-xl hover:bg-[#4f4ff5] cursor-pointer ">
-          <img src={circleplus} className="h-5" />
+        <button className="h-10 font-AlbertSans border-0 px-4 py-6 shadow-lg font-medium text-xl flex justify-center items-center gap-1 text-white bg-[#6161ff] rounded-xl hover:bg-[#4f4ff5] cursor-pointer ">
+          {/* <img src={circleplus} className="h-5" /> */}
+          <IoMdAddCircleOutline className="text-white" />
           New Tasks
         </button>
       </div>

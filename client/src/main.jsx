@@ -7,6 +7,7 @@ import { CustomProvider } from "rsuite";
 
 import "rsuite/dist/rsuite.min.css";
 import "./index.css";
+import Sidebar from "../components/myspace/Sidebar.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

@@ -9,15 +9,17 @@ const Sideprofile = ({ label, icon }) => {
   };
 
   return (
-    <div className="px-3 py-3 cursor-pointer flex items-center rounded-xl border text-2xl bg-white">
+    <div className="px-3 py-3 cursor-pointer flex items-center rounded-xl border text-xl bg-white shadow">
       <div className="flex justify-center items-center border-0 w-15 h-15 rounded-xl">
         <img
           src={icon}
           alt=""
-          className="h-10 w-10 inline-block align-middle "
+          className="h-10 w-10 inline-block align-middle"
         />
       </div>
-      <div className="tracking-normal font-semibold">{toTitleCase(label)}</div>
+      <div className="tracking-normal font-semibold ml-3">
+        {toTitleCase(label)}
+      </div>
     </div>
   );
 };

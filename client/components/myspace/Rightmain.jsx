@@ -4,21 +4,29 @@ import MainHeading from "./MainHeading";
 import Todocomp from "./Todocomp";
 import useTodos from "../../hooks/useTodos";
 
-const Rightmain = () => {
+const Rightmain = ({ handleTodoClick, toggle }) => {
   const { todos, loading, error } = useTodos();
 
   return (
-    <div className="w-full">
-      <div className="fixed bg-white top-0 w-[60vw]">
+    <div className="w-full border-r-2">
+      <div className="bg-white w-full h-[16rem] sticky top-0 z-50">
         <Navbar />
         <MainHeading />
       </div>
-      <div className="h-full mt-[18rem]">
+      <div
+        className="w-full overflow-y-auto"
+        style={{ maxHeight: `calc(100vh - 16rem)` }}
+      >
         {loading && <div>Loading ...</div>}
         {error && <div>Error: {error}</div>}
         {!loading &&
           todos.map((todo, index) => (
-            <Todocomp key={index} name={todo.title} />
+            <Todocomp
+              key={index}
+              name={todo.title}
+              onClick={() => handleTodoClick(todo)}
+              toggle={toggle}
+            />
           ))}
       </div>
     </div>

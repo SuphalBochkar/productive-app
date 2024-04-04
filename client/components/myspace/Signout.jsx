@@ -26,7 +26,7 @@ const Signout = ({ label, icon }) => {
 
   return (
     <div
-      className="px-3 py-3 cursor-pointer flex items-center rounded-xl border text-2xl bg-white"
+      className="px-3 py-3 cursor-pointer flex items-center rounded-xl border text-2xl shadow bg-white"
       onClick={signout}
     >
       <div className="flex justify-center items-center border-0 w-9 h-9 rounded-xl">

@@ -3,14 +3,14 @@ import TaskDetailsInfo from "./TaskDetailsInfo";
 import Attachment from "./Attachment";
 import Comments from "./Comments";
 
-const TaskDetails = ({ label, des }) => {
+const TaskDetails = ({ details }) => {
   return (
-    <div className="p-4">
-      <h3>Task Details</h3>
-      <div className="border p-4 rounded-lg m-1">
+    <div className="p-4 w-[30rem] h-full relative font-AlbertSans transition">
+      <h3 className="text-3xl">Task Details</h3>
+      <div className="border p-4 rounded-xl m-1 mt-5">
         <h6 className="mb-3 text-gray-400 font-semibold">My Work Task</h6>
-        <h3 className="mb-3">{label}</h3>
-        <p className="mb-8">{des}</p>
+        <h3 className="mb-3">{details.label}</h3>
+        <p className="mb-8">{details.des}</p>
         <TaskDetailsInfo title={"TimeLine"} label={"22 April 2024"} />
         <TaskDetailsInfo title={"Time"} label={"22 April 2024"} />
         <TaskDetailsInfo title={"Assigne"} label={"22 April 2024"} />
