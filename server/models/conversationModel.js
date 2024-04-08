@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 
-console.log("conversation");
-
 const conversationSchema = new mongoose.Schema(
   {
     participants: [

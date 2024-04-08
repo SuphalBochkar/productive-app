@@ -1,4 +1,5 @@
 const conversationsDB = require("../models/conversationModel");
+const userDB = require("../models/userModel");
 const messagesDB = require("../models/messageModel");
 const { getReceiverSocketId, io } = require("../socket/socketIo");
 
@@ -17,7 +18,8 @@ const getMessages = async (req, res) => {
       .populate("messages"); // Populate messages field with actual message documents
 
     // If conversation doesn't exist, respond with an empty array of messages
-    if (!conversation) return res.status(200).json([]);
+    if (!conversation)
+      return res.status(200).json({ msg: "No conversation", messages: [] });
 
     // Extract messages from the conversation
     const messages = conversation.messages;
@@ -41,32 +43,48 @@ const sendMessage = async (req, res) => {
     console.log(receiverId);
     console.log(senderId);
 
+    // Check if a conversation already exists between sender and receiver
     let conversation = await conversationsDB.findOne({
       participants: { $all: [senderId, receiverId] },
     });
 
     if (!conversation) {
+      // If conversation doesn't exist, create a new one
       conversation = await conversationsDB.create({
         participants: [senderId, receiverId],
       });
     }
 
+    // Create a new message
     const newMessage = new messagesDB({
       senderId,
       receiverId,
       message,
     });
 
-    conversation.messages.push(newMessage._id); // Push _id of newMessage into messages array
+    // Add the message to the conversation
+    conversation.messages.push(newMessage._id);
 
+    // Save the conversation and the new message
     await Promise.all([conversation.save(), newMessage.save()]);
+
+    // Update the conversation reference in the user model for both sender and receiver
+    await Promise.all([
+      userDB.findByIdAndUpdate(senderId, {
+        $addToSet: { conversations: conversation._id },
+      }),
+      userDB.findByIdAndUpdate(receiverId, {
+        $addToSet: { conversations: conversation._id },
+      }),
+    ]);
 
     const receiverSocketId = getReceiverSocketId(receiverId);
 
     if (receiverSocketId) {
-      // io.to(<socket_id>).emit() used to send events to specific client
+      // Emit the new message event to the receiver
       io.to(receiverSocketId).emit("newMessage", newMessage);
     }
+
     res.status(201).json(newMessage);
   } catch (error) {
     console.log("Error in sendMessage controller: ", error.message);
@@ -74,4 +92,62 @@ const sendMessage = async (req, res) => {
   }
 };
 
-module.exports = { sendMessage, getMessages };
+// Controller function to retrieve users the current user has chatted with
+const getMyChatsUsers = async (req, res) => {
+  try {
+    const loggedInUserId = req.user._id;
+    const conversations = await conversationsDB
+      .find({
+        participants: loggedInUserId,
+      })
+      .populate("participants", "_id username email profilePic");
+
+    // Extract unique participants from all conversations
+    const users = conversations.reduce((acc, conversation) => {
+      conversation.participants.forEach((participant) => {
+        if (participant._id.toString() !== loggedInUserId.toString()) {
+          acc.push(participant); // Push user objects into the array
+        }
+      });
+      return acc;
+    }, []);
+
+    res.status(200).json(users); // Return the array of users
+  } catch (error) {
+    console.log("Error in getMyChatsUsers controller:", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+module.exports = { sendMessage, getMessages, getMyChatsUsers };
+
+// const getMyChats = async (req, res) => {
+//   try {
+//     const userId = req.user._id;
+//     // Find the user by ID and populate the 'conversations' field to get the details of conversations
+//     const user = await userDB.findById(userId).populate({
+//       path: "conversations",
+//       populate: { path: "participants", select: "username email profilePic" },
+//     });
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+//     // Extract the participants from the conversations
+//     const chats = user.conversations.map(
+//       (conversation) => conversation.participants
+//     );
+//     // console.log("userId: ", userId);
+//     // console.log("chats: ", chats);
+//     // Filter out the current user's details from the list of participants
+//     const myChats = chats.map((chat) =>
+//       chat.filter(
+//         (participant) => participant._id.toString() !== userId.toString()
+//       )
+//     );
+//     // console.log("mychats: ", myChats);
+//     res.status(200).json({ myChats });
+//   } catch (error) {
+//     console.log("Error in getMyChats controller:", error.message);
+//     res.status(500).json({ message: "Internal Server Error" });
+//   }
+// };

@@ -25,6 +25,9 @@ const userSchema = mongoose.Schema({
   },
   taskTypes: [{ type: mongoose.Schema.Types.ObjectId, ref: "TaskType" }],
   todoList: [{ type: mongoose.Schema.Types.ObjectId, ref: "todos" }],
+  conversations: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "conversations" },
+  ],
 });
 
 const userDB = mongoose.model("users", userSchema);

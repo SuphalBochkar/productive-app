@@ -72,13 +72,41 @@ const signout = (req, res) => {
   }
 };
 
+// const getUsers = async (req, res) => {
+//   try {
+//     const loggedInUserId = req.user._id;
+//     const allUsers = await userDB
+//       .find({ _id: { $ne: loggedInUserId } })
+//       .select("_id username email profilePic");
+//     res.status(200).json(allUsers);
+//   } catch (error) {
+//     console.log("Error in getUsers controller:", error.message);
+//     res.status(500).json({ message: "Internal Server Error" });
+//   }
+// };
+
+// Controller function to retrieve users based on search query
 const getUsers = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
-    const allUsers = await userDB
-      .find({ _id: { $ne: loggedInUserId } })
+    const { search } = req.query;
+
+    // If search query is provided, filter users by username or email
+    let query = { _id: { $ne: loggedInUserId } };
+    if (search) {
+      query.$or = [
+        { username: { $regex: search, $options: "i" } },
+        { email: { $regex: search, $options: "i" } },
+      ];
+    } else {
+      // If no search query is provided, return an empty array
+      res.status(200).json([]);
+      return;
+    }
+    const users = await userDB
+      .find(query)
       .select("_id username email profilePic");
-    res.status(200).json(allUsers);
+    res.status(200).json(users); // Return the array of users
   } catch (error) {
     console.log("Error in getUsers controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
