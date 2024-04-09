@@ -17,10 +17,17 @@ const signup = async (req, res) => {
       req.token = generateTokenCookie(newUser._id, res);
       await newUser.save();
 
-      console.log(req.token);
+      const userResponse = {
+        _id: newUser._id,
+        username: newUser.username,
+        email: newUser.email,
+      };
+
+      // console.log(req.token);
       res.json({
         msg: "Signed up Successfully",
         token: req.token,
+        user: userResponse,
       });
     } else {
       res.status(400).json({ error: "Invalid User Data" });
@@ -52,9 +59,16 @@ const signin = async (req, res) => {
 
     const jwt = generateTokenCookie(user, res);
 
+    const userResponse = {
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+    };
+
     return res.json({
       msg: "Signed in Successfully",
       jwt: jwt,
+      user: userResponse,
     });
   } catch (error) {
     console.log("Error at SIGNIN: ", error.message);

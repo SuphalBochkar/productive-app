@@ -5,26 +5,29 @@ const userDB = require("../models/userModel");
 
 const authMiddleware = async (req, res, next) => {
   try {
+    //! -------------Server Client JWT------------------
     //& Server
     // const token = req.cookies.jwt;
     //& Client
     const token = req.headers.authorization; // Get the token from request headers
-
+    //! -------------Server Client JWT------------------
+    
     console.log("Token:", token); // Debugging statement
-
+    
     if (!token) {
       return res
-        .status(401)
-        .json({ message: "Unauthorized Access: No Token Provided" });
+      .status(401)
+      .json({ message: "Unauthorized Access: No Token Provided" });
     }
-
+    
+    //! -------------Server Client JWT------------------
     //& Server
     // const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
     //& Client
     const decoded = jwt.verify(token.split(" ")[1], process.env.JWT_SECRET); // Split the token to remove "Bearer"
-    console.log("Decoded:", decoded); // Debugging statement
+    //! -------------Server Client JWT------------------
 
+    console.log("Decoded:", decoded); // Debugging statement
     if (!decoded) {
       return res
         .status(401)

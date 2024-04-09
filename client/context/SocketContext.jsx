@@ -12,13 +12,14 @@ export const useSocketContext = () => {
 export const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
-  const { authUser } = useAuthContext();
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    if (authUser) {
-      const socket = io("Socket Sending", {
+    if (userId) {
+      const socket = io("http://localhost:3000", {
+        // Connect to your Socket.io server running on port 5000
         query: {
-          userId: authUser._id,
+          userId: userId,
         },
       });
       setSocket(socket);
@@ -32,7 +33,7 @@ export const SocketContextProvider = ({ children }) => {
         setSocket(null);
       }
     }
-  }, [authUser]);
+  }, [userId]);
 
   return (
     <SocketContext.Provider value={{ socket, onlineUsers }}>

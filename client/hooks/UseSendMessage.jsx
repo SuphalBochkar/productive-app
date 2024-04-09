@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import toast from "react-hot-toast";
 import axiosInstance from "../services/axiosInstance";
-import { selectedConversationState } from "../store/atoms";
-import { setMessages } from "../store/selectors";
+import { messagesState, selectedConversationState } from "../store/atoms";
 
 const useSendMessage = () => {
   const [loading, setLoading] = useState(false);
-  const [selectedConversation] = useRecoilState(selectedConversationState);
+  const selectedConversation = useRecoilValue(selectedConversationState);
+  const [messages, setMessages] = useRecoilState(messagesState);
 
   const sendMessage = async (message) => {
     setLoading(true);

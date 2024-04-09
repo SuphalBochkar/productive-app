@@ -38,6 +38,7 @@ const useSignup = () => {
       );
       console.log(response.data);
       localStorage.setItem("jwt", response.data.token);
+      localStorage.setItem("user", response.data.user);
       setAuthUser(response.data.token);
       toast.success(response.data.msg);
       navigate("/myspace");

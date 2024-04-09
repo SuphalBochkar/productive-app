@@ -12,6 +12,7 @@ const Signout = ({ label, icon }) => {
     try {
       await axiosInstance.post("/user/signout");
       localStorage.removeItem("jwt");
+      localStorage.removeItem("user");
       setAuthUser(null);
       toast.success("Logged out successfully");
       navigate("/signin");

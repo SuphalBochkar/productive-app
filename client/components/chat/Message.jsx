@@ -6,20 +6,15 @@ import { useRecoilState } from "recoil";
 import useUserDetails from "../../hooks/useUserDetails.jsx";
 
 const Message = ({ message }) => {
-  const { authUser } = useAuthContext();
+  const [selectedConversation] = useRecoilState(selectedConversationState);
+  const userId = localStorage.getItem("userId");
   const { userDetails, loading, error } = useUserDetails();
 
-  const [selectedConversation, setSelectedConversation] = useRecoilState(
-    selectedConversationState
-  );
-
-  const fromMe = message.senderId === userDetails?._id;
+  const fromMe = message.senderId === userId;
   const chatClassName = fromMe ? "chat-end" : "chat-start";
-  console.log(message);
-  console.log(fromMe);
 
   const profilePic = fromMe
-    ? authUser.profilePic
+    ? userDetails?.profilePic
     : selectedConversation?.profilePic;
 
   const bubbleBgColor = fromMe
