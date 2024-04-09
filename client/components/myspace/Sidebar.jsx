@@ -26,7 +26,7 @@ const Sidebar = () => {
       icon: <BsViewList />,
     },
     {
-      path: "/message",
+      path: "/chat",
       label: "Inbox",
       icon: <BiMessageSquareDetail />,
     },
