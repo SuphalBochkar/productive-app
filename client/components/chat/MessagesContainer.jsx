@@ -17,14 +17,14 @@ const MessagesContainer = () => {
   }, [setSelectedConversation]);
 
   return (
-    <div className="md:min-w-[450px] flex flex-col">
+    <div className="w-full flex flex-col">
       {selectedConversation.length === 0 ? (
         <NoChatSelectedComponent />
       ) : (
         <>
-          <div className="px-2 mb-2">
-            <span className="label-text">To: </span>
-            <span className="text-gray-900 font-bold">
+          <div className="p-4 bg-gray-300 flex items-center">
+            <img src={selectedConversation.profilePic} className="h-16" alt="" />
+            <span className="text-gray-900 text-2xl font-bold ml-2">
               {selectedConversation.username}
             </span>
           </div>

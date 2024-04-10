@@ -5,11 +5,20 @@ import Sidebar from "../components/myspace/Sidebar";
 
 const UserChat = () => {
   return (
-    <div className="flex sm:h-[450px] md:h-[550px] rounded-lg overgflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20">
-      <Sidebar />
-      <SideBar />
-      <MessagesContainer />
-    </div>
+    <>
+      <div className="font-AlbertSans w-[20rem] left-0 top-0 fixed h-full bg-[#f3f4f6]">
+        <Sidebar />
+      </div>
+      <div
+        className="top-0 left-[20rem] h-full relative w-auto flex rounded-lg overgflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20"
+        style={{ width: `calc(100% - 20rem)` }}
+      >
+        <div className="w-1/4">
+          <SideBar />
+        </div>
+        <MessagesContainer />
+      </div>
+    </>
   );
 };
 

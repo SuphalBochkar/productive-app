@@ -4,7 +4,7 @@ import Conversations from "./Conversations";
 
 const SideBar = () => {
   return (
-    <div className="border-r p-4 border-white flex flex-col">
+    <div className="border-r p-4 border-white flex h-screen flex-col">
       <SearchInput />
       <div className="divider px-3"></div>
       <Conversations />
