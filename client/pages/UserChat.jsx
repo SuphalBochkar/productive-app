@@ -13,7 +13,7 @@ const UserChat = () => {
         className="top-0 left-[20rem] h-full relative w-auto flex rounded-lg overgflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-20"
         style={{ width: `calc(100% - 20rem)` }}
       >
-        <div className="w-1/4">
+        <div className="w-[27vw] min-w-[250px]">
           <SideBar />
         </div>
         <MessagesContainer />
