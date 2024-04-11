@@ -22,5 +22,5 @@ export const taskDetailsState = atom({
 
 export const sidebarToggleState = atom({
   key: "sidebarToggleState",
-  default: "new", // Default state is set to "none"
+  default: "none", // Default state is set to "none"
 });

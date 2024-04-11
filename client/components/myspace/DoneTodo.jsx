@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Todoinfo from "./Todoinfo";
 import Tasktype from "./Tasktype";
 
-const DoneTodo = ({ name }) => {
+const DoneTodo = ({ name, onToggleCompleted }) => {
   return (
     <div className="flex shadow-md bg-[#f6f6f6] font-AlbertSans p-2 mx-6 my-5 border-2 border-gray-200 border-solid cursor-pointer rounded-xl">
       <div className="m-2 pt-0.5">
@@ -10,6 +10,7 @@ const DoneTodo = ({ name }) => {
           <input
             type="checkbox"
             className="form-checkbox h-5 w-5 text-blue-500"
+            onClick={onToggleCompleted}
             checked
           />
         </label>

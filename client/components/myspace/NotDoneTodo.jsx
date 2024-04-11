@@ -9,7 +9,7 @@ import del from "../../src/assets/delete.svg";
 import { sidebarToggleState, taskDetailsState } from "../../store/atoms";
 import { useRecoilState } from "recoil";
 
-const NotDoneTodo = ({ name }) => {
+const NotDoneTodo = ({ name, onToggleCompleted }) => {
   const [sidebarToggle, setSidebarToggle] = useRecoilState(sidebarToggleState);
   const [taskDetails, setTaskDetails] = useRecoilState(taskDetailsState);
 
@@ -25,12 +25,11 @@ const NotDoneTodo = ({ name }) => {
           <input
             type="checkbox"
             className="form-checkbox h-5 w-5 text-blue-500"
+            onClick={onToggleCompleted}
           />
         </label>
       </div>
       <div className="mx-2 flex-grow">
-        {" "}
-        {/* Added flex-grow to this div */}
         <div id="check" className="my-1">
           <h2 className="font-medium text-2xl">{name}</h2>
         </div>
