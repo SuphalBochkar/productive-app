@@ -31,3 +31,23 @@ export const setSearch = selector({
     return get(searchState);
   },
 });
+
+export const setTaskDetails = selector({
+  key: "setTaskDetails",
+  set: ({ set }, taskDetails) => {
+    set(taskDetailsState, taskDetails);
+  },
+  get: ({ get }) => {
+    return get(taskDetailsState);
+  },
+});
+
+export const setSidebarToggle = selector({
+  key: "setSidebarToggle",
+  set: ({ set }, toggleState) => {
+    set(sidebarToggleState, toggleState);
+  },
+  get: ({ get }) => {
+    return get(sidebarToggleState);
+  },
+});

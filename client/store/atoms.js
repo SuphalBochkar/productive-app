@@ -14,3 +14,13 @@ export const selectedConversationState = atom({
   key: "selectedConversationState",
   default: [],
 });
+
+export const taskDetailsState = atom({
+  key: "taskDetailsState",
+  default: {},
+});
+
+export const sidebarToggleState = atom({
+  key: "sidebarToggleState",
+  default: "new", // Default state is set to "none"
+});

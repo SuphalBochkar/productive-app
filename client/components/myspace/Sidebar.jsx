@@ -18,7 +18,8 @@ import { FiTrash2 } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
-  const { userDetails, loading } = useUserDetails(); // Destructure userDetails and loading from the hook
+  const user = localStorage.getItem("user");
+  const userObj = JSON.parse(user);
   const menuItems = [
     {
       path: "/myspace",
@@ -44,12 +45,12 @@ const Sidebar = () => {
   return (
     <div className="h-full p-[1.5rem] flex flex-col justify-between relative z-9999">
       <div>
-        {loading || !userDetails ? (
+        {!userObj ? (
           <Sideprofile label={`User's Space`} icon={human} />
         ) : (
           <Sideprofile
-            label={`${userDetails.username}'s Space`}
-            icon={userDetails.profilePic}
+            label={`${userObj.username}'s Space`}
+            icon={userObj.profilePic}
           />
         )}
         <Sideheading label={"General"} />
