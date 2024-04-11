@@ -9,14 +9,17 @@ import del from "../../src/assets/delete.svg";
 import { sidebarToggleState, taskDetailsState } from "../../store/atoms";
 import { useRecoilState } from "recoil";
 
-const NotDoneTodo = ({ name, onToggleCompleted }) => {
+const NotDoneTodo = ({ todo, onToggleCompleted }) => {
   const [sidebarToggle, setSidebarToggle] = useRecoilState(sidebarToggleState);
   const [taskDetails, setTaskDetails] = useRecoilState(taskDetailsState);
 
   const editHandle = () => {
     setSidebarToggle("edit");
-    setTaskDetails(name);
+    setTaskDetails({});
+    setTaskDetails(todo);
   };
+
+  // console.log("Not done tod", todo);
 
   return (
     <div className="flex hover:bg-oran-700 shadow-md font-AlbertSans p-2 mx-6 my-5 border-2 border-gray-200 border-solid rounded-xl cursor-pointer relative">
@@ -31,17 +34,18 @@ const NotDoneTodo = ({ name, onToggleCompleted }) => {
       </div>
       <div className="mx-2 flex-grow">
         <div id="check" className="my-1">
-          <h2 className="font-medium text-2xl">{name}</h2>
+          <h2 className="font-medium text-2xl">{todo.title}</h2>
         </div>
         <div className="flex gap-3 my-3">
-          <Todoinfo label={"5"} svg={atta} />{" "}
+          <Todoinfo label={"5"} svg={atta} />
           <span className="text-[#aeafaf]">•</span>
-          <Todoinfo label={"12"} svg={comm} />{" "}
+          <Todoinfo label={"12"} svg={comm} />
           <span className="text-[#aeafaf]">•</span>
           <Todoinfo label={"22 Jan 2023"} svg={cal} />
         </div>
-        <div className="mb-2">
-          <Tasktype type={"Meeting"} />
+        <div className="flex mb-2 gap-5">
+          <Tasktype type={todo.taskTypeName} />
+          <Tasktype type={todo.status} />
         </div>
       </div>
       <div className="flex gap-3 items-center">
@@ -54,14 +58,14 @@ const NotDoneTodo = ({ name, onToggleCompleted }) => {
         <div>
           <button
             type="button"
-            class="focus:outline-none text-gray-700 bg-green-200 hover:bg-green-400 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2 dark:bg-green-200 dark:hover:bg-green-400 dark:focus:ring-green-400"
+            className="focus:outline-none text-gray-700 bg-green-200 hover:bg-green-400 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2 dark:bg-green-200 dark:hover:bg-green-400 dark:focus:ring-green-400"
             onClick={() => editHandle()}
           >
             Edit
           </button>
           <button
             type="button"
-            class="focus:outline-none text-gray-700 bg-red-200 hover:bg-red-400 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-200 dark:hover:bg-red-400 dark:focus:ring-red-500"
+            className="focus:outline-none text-gray-700 bg-red-200 hover:bg-red-400 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-200 dark:hover:bg-red-400 dark:focus:ring-red-500"
           >
             Delete
           </button>

@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Navbar from "./Navbar";
 import MainHeading from "./MainHeading";
 import Todocomp from "./Todocomp";
 import useTodos from "../../hooks/useTodos";
+import { useRecoilState } from "recoil";
+import { currentTodosSelector } from "../../store/selectors";
 
-const Rightmain = ({ handleTodoClick, toggle }) => {
+const Rightmain = ({ handleTodoClick }) => {
   const { todos, loading, error } = useTodos();
+  // console.log("Use todo", todos);
+
+  const [currentTodos, setCurrentTodos] = useRecoilState(currentTodosSelector);
 
   return (
     <div className="w-full border-r-2">
@@ -20,12 +25,11 @@ const Rightmain = ({ handleTodoClick, toggle }) => {
         {loading && <div>Loading ...</div>}
         {error && <div>Error: {error}</div>}
         {!loading &&
-          todos.map((todo, index) => (
+          currentTodos.map((todo) => (
             <Todocomp
-              key={index}
-              name={todo.title}
+              key={todo._id}
+              todo={todo}
               onClick={() => handleTodoClick(todo)}
-              toggle={toggle}
             />
           ))}
       </div>

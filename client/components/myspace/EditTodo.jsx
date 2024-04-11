@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dropdown } from "flowbite-react";
 
 import TaskDetailsInfo from "./TaskDetailsInfo";
@@ -6,18 +6,51 @@ import Attachment from "./Attachment";
 import Comments from "./Comments";
 import TaskInput from "./TodoInput/TaskInput";
 import { useRecoilState, useSetRecoilState } from "recoil"; // Import useSetRecoilState
-import { sidebarToggleState } from "../../store/atoms";
+import { sidebarToggleState, taskDetailsState } from "../../store/atoms";
 
-const TaskDetails = ({ details }) => {
-  // State variables for title, description, time, and type
-  const [title, setTitle] = useState(details.label);
-  const [description, setDescription] = useState(details.des);
-  const [time, setTime] = useState(""); // Initialize time state with an empty string
-  const [type, setType] = useState(""); // Initialize type state with an empty string
+const EditTodo = () => {
   const [sidebarToggle, setSidebarToggle] = useRecoilState(sidebarToggleState);
+  const [taskDetails, setTaskDetails] = useRecoilState(taskDetailsState);
+
+  const [title, setTitle] = useState(taskDetails.title);
+  const [description, setDescription] = useState("Edit Details");
+  const [time, setTime] = useState("");
+  const [type, setType] = useState("");
+
+  useEffect(() => {
+    setTitle(taskDetails.title);
+    setDescription(taskDetails?.description);
+  }, [taskDetails]);
 
   const cancelHandle = () => {
     setSidebarToggle("none");
+};
+
+  const saveTodo = async () => {
+    try {
+      const todoId = taskDetails._id;
+      const response = await axiosInstance.post(`/todo/update/${todoId}`, {
+        title: title,
+      });
+      console.log(response.data);
+      toast.success(response.data.message);
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.message || "An error occurred", {
+          duration: 600,
+        });
+      } else if (error.request) {
+        toast.error("No response received from server", {
+          duration: 600,
+        });
+      } else {
+        toast.error("Error: " + error.message, {
+          duration: 600,
+        });
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -52,7 +85,7 @@ const TaskDetails = ({ details }) => {
           <input
             id="title"
             type="text"
-            placeholder="Title goes here.."
+            // placeholder="Title goes here.."
             className="p-5 w-full text-2xl border rounded-lg m-auto"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -132,4 +165,4 @@ const TypeInput = ({ type, setType }) => {
   );
 };
 
-export default TaskDetails;
+export default EditTodo;

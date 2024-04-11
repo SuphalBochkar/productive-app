@@ -1,6 +1,5 @@
 import React from "react";
 import DoneTodo from "../components/myspace/DoneTodo";
-import TaskDetails from "../components/myspace/TaskDetails";
 import Todocomp from "../components/myspace/Todocomp";
 import SubscriptionInfo from "../components/myspace/SubscriptionInfo";
 

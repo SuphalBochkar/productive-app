@@ -46,41 +46,33 @@ const getTodo = async (req, res) => {
     const limit = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * limit;
 
-    // Fetch todos with pagination and as plain JavaScript objects
+    // Fetch todos with pagination
     const todos = await todoDB
       .find({ createdBy: req.user._id })
       .skip(skip)
       .limit(limit)
+      .populate("taskType", "name") // Populate taskType field with only the name field
       .lean();
 
     if (todos.length === 0) {
       return res.status(404).json({ message: "No todos available" });
     }
 
-    // Extract unique taskType IDs from todos
-    const taskTypeIds = [...new Set(todos.map((todo) => todo.taskType))];
-
-    // Fetch task types based on their IDs
-    const taskTypes = await TaskType.find({ _id: { $in: taskTypeIds } });
-
-    // Map task type IDs to their names
-    const taskTypeMap = {};
-    taskTypes.forEach((taskType) => {
-      taskTypeMap[taskType._id] = taskType.name;
-    });
-
-    // Construct array of todos with ID and other necessary fields
-    const todosToSend = todos.map((todo) => ({
+    // Process todos to remove nested objects for taskTypeName and taskTypeId
+    const processedTodos = todos.map((todo) => ({
       _id: todo._id,
       title: todo.title,
       completed: todo.completed,
       status: todo.status,
+      createdBy: todo.createdBy,
       dueDate: todo.dueDate,
-      taskTypeName: taskTypeMap[todo.taskType],
-      taskTypeId: todo.taskType,
+      taskTypeName: todo.taskType?.name, // Access populated field directly
+      taskTypeId: todo.taskType?._id, // Access populated field directly
+      __v: todo.__v,
     }));
 
-    res.json({ todos: todosToSend });
+    console.log("server", processedTodos);
+    res.json({ todos: processedTodos });
   } catch (error) {
     console.log("Error fetching todos: ", error.message);
     res.status(500).json({ error: "Internal Server Error" });

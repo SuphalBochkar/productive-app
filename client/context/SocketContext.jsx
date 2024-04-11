@@ -14,7 +14,7 @@ export const SocketContextProvider = ({ children }) => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const user = localStorage.getItem("user");
   const userObj = JSON.parse(user);
-  const userId = userObj._id;
+  const userId = userObj?._id;
 
   // useEffect(() => {
   //   if (userId) {

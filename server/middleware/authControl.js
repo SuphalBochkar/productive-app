@@ -8,18 +8,18 @@ const authMiddleware = async (req, res, next) => {
     //! -------------Server Client JWT------------------
     //& Server
     // const token = req.cookies.jwt;
-    //& Client
+    // & Client
     const token = req.headers.authorization; // Get the token from request headers
     //! -------------Server Client JWT------------------
-    
+
     console.log("Token:", token); // Debugging statement
-    
+
     if (!token) {
       return res
-      .status(401)
-      .json({ message: "Unauthorized Access: No Token Provided" });
+        .status(401)
+        .json({ message: "Unauthorized Access: No Token Provided" });
     }
-    
+
     //! -------------Server Client JWT------------------
     //& Server
     // const decoded = jwt.verify(token, process.env.JWT_SECRET);

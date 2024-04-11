@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 import { Fragment } from "react";
 // import { Menu, Transition } from "@headlessui/React";
@@ -11,13 +12,62 @@ import Comments from "./Comments";
 import { useRecoilState, useSetRecoilState } from "recoil"; // Import useSetRecoilState
 
 import { sidebarToggleState, taskDetailsState } from "../../store/atoms";
+import axiosInstance from "../../services/axiosInstance";
 
-const SaveTaskDetails = () => {
+const AddTodo = () => {
   const [sidebarToggle, setSidebarToggle] = useRecoilState(sidebarToggleState);
   const [taskDetails, setTaskDetails] = useRecoilState(taskDetailsState);
+  const [loading, setLoading] = useState(false);
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [time, setTime] = useState("");
+  const [type, setType] = useState("");
 
   const cancelHandle = () => {
     setSidebarToggle("none");
+  };
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const handleTimeChange = (e) => {
+    setTime(e.target.value);
+  };
+
+  const handleTypeChange = (e) => {
+    setType(e.target.value);
+  };
+
+  const saveTodo = async () => {
+    try {
+      const response = await axiosInstance.post("/todo/add", {
+        title: title,
+      });
+      console.log(response.data);
+      toast.success(response.data.message);
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.message || "An error occurred", {
+          duration: 600,
+        });
+      } else if (error.request) {
+        toast.error("No response received from server", {
+          duration: 600,
+        });
+      } else {
+        toast.error("Error: " + error.message, {
+          duration: 600,
+        });
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -28,6 +78,7 @@ const SaveTaskDetails = () => {
           <button
             type="button"
             className="text-white bg-[#6161ff] hover:bg-[#4f4ff5] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            onClick={saveTodo}
           >
             Save
           </button>
@@ -43,7 +94,7 @@ const SaveTaskDetails = () => {
       <div className="border p-4 rounded-xl m-1 mt-5">
         <h6 className="mb-3 text-gray-400 font-semibold">My Work Task</h6>
         <label
-          for="title"
+          htmlFor="title"
           className="block my-2 text-md font-medium text-gray-900 dark:text-white"
         >
           Enter Title:
@@ -53,9 +104,11 @@ const SaveTaskDetails = () => {
           type="text"
           placeholder="Title goes here.."
           className="p-5 w-full text-2xl border rounded-lg m-auto"
+          value={title}
+          onChange={handleTitleChange}
         />
         <label
-          for="description"
+          htmlFor="description"
           className="block my-2 text-md font-medium text-gray-900 dark:text-white"
         >
           Enter Description:
@@ -65,13 +118,12 @@ const SaveTaskDetails = () => {
           rows="4"
           className="block p-2.5 w-full text-sm my-3 bg-white rounded-lg border focus:border-blue-500"
           placeholder="Enter the description..."
+          value={description}
+          onChange={handleDescriptionChange}
         ></textarea>
-        {/* <TaskInput title={"Assignee"} label={"22 April 2024"} />
-        <TaskInput title={"Time"} label={"22 April 2024"} />
-        <TaskInput title={"Type"} label={"22 April 2024"} /> */}
         <Assignee />
-        <TimeInput />
-        <TypeInput />
+        <TimeInput value={time} onChange={handleTimeChange} />
+        <TypeInput value={type} onChange={handleTypeChange} />
       </div>
     </div>
   );
@@ -85,14 +137,14 @@ const Assignee = () => {
     <div className="flex items-center">
       <div className="w-[40vw] text-2xl">Assignee</div>
       <div className="w-[70vw] flex">
-        <img src={userObj.profilePic} alt="" srcset="" className="w-12 h-12" />
+        <img src={userObj.profilePic} alt="" srcSet="" className="w-12 h-12" />
         <div className="text-lg flex items-center">{userObj.username}</div>
       </div>
     </div>
   );
 };
 
-const TimeInput = () => {
+const TimeInput = ({ value, onChange }) => {
   return (
     <div className="flex items-center">
       <div className="w-[40vw] text-2xl">Time</div>
@@ -103,7 +155,8 @@ const TimeInput = () => {
           className="leading-none border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 w-[130px]"
           min="09:00"
           max="18:00"
-          value="00:00"
+          value={value}
+          onChange={onChange}
           required
         />
       </div>
@@ -111,7 +164,7 @@ const TimeInput = () => {
   );
 };
 
-const TypeInput = () => {
+const TypeInput = ({ value, onChange }) => {
   return (
     <div className="flex items-center">
       <div className="w-[40vw] text-2xl">Type</div>
@@ -128,4 +181,4 @@ const TypeInput = () => {
   );
 };
 
-export default SaveTaskDetails;
+export default AddTodo;

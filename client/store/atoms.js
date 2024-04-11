@@ -24,3 +24,8 @@ export const sidebarToggleState = atom({
   key: "sidebarToggleState",
   default: "none", // Default state is set to "none"
 });
+
+export const currentTodosState = atom({
+  key: "currentTodosState",
+  default: [], // Default state is set to an empty array
+});
