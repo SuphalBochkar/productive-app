@@ -27,12 +27,12 @@ const Conversations = () => {
   };
 
   return (
-    <div>
+    <div className="">
       {usersToDisplay.map((user) => (
-        <div key={user._id} onClick={() => handleUserSelect(user)}>
-          <div>ID: {user._id}</div>
-          <div>Username: {user.username}</div>
-          <div>Email: {user.email}</div>
+        <div key={user._id} className="hover:bg-gray-300 hover:cursor-pointer m-1 p-5 rounded-lg" onClick={() => handleUserSelect(user)}>
+          <div className="hidden">ID: {user._id}</div>
+          <div className="text-lg font-bold">{user.username}</div>
+          <div className="hidden">Email: {user.email}</div>
         </div>
       ))}
     </div>

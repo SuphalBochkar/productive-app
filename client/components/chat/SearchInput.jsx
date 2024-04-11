@@ -70,6 +70,7 @@ const SearchInput = () => {
           placeholder="Search username...."
           onChange={handleChange}
           value={search}
+          className="my-3 p-2 w-full rounded-md mb-5"
         />
       </form>
     </div>

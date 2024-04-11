@@ -36,7 +36,7 @@ const Message = ({ message }) => {
         <div className="flex justify-end">
           <div class="flex items-end gap-2.5 m-3 max-w-[1000px]">
             <div
-              className={`flex flex-col w-full max-w-[700px] leading-1.5 p-4 border-gray-200 bg-[#005c4b] rounded-e-xl rounded-es-xl dark:bg-gray-700`}
+              className={`flex flex-col w-full max-w-[700px] leading-1.5 p-4 border-gray-200 bg-[#3a3a3a] rounded-e-xl rounded-xl`}
               style={{ overflowWrap: "break-word" }}
             >
               <div class="flex items-center space-x-2 rtl:space-x-reverse">
@@ -66,13 +66,13 @@ const Message = ({ message }) => {
             alt="Jese image"
           ></img>
           <div
-            className={`flex flex-col w-full max-w-[200px] leading-1.5 p-4 border-gray-200 rounded-e-xl rounded-es-xl bg-[#005c4b] dark:bg-gray-700`}
+            className={`flex flex-col w-full max-w-[200px] leading-1.5 p-4 border-gray-200 rounded-e-xl rounded-xl bg-[#0783ff]`}
           >
             <div class="flex items-center space-x-2 rtl:space-x-reverse">
               <span class="text-sm font-semibold text-gray-900 dark:text-white">
                 {userName}
               </span>
-              <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+              <span class="text-sm font-normal text-white dark:text-gray-100">
                 {formattedTime}
               </span>
             </div>
