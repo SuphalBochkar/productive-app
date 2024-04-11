@@ -25,7 +25,7 @@ const useSignin = () => {
       );
       console.log(response.data);
       localStorage.setItem("jwt", response.data.jwt);
-      localStorage.setItem("userId", response.data.user._id);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       setAuthUser(response.data.jwt);
       toast.success(response.data.msg);
       navigate("/myspace");

@@ -21,6 +21,7 @@ const signup = async (req, res) => {
         _id: newUser._id,
         username: newUser.username,
         email: newUser.email,
+        profilePic: profilePic,
       };
 
       // console.log(req.token);
@@ -63,6 +64,7 @@ const signin = async (req, res) => {
       _id: user._id,
       username: user.username,
       email: user.email,
+      profilePic: user.profilePic,
     };
 
     return res.json({

@@ -7,23 +7,22 @@ import useUserDetails from "../../hooks/useUserDetails.jsx";
 
 const Message = ({ message }) => {
   const [selectedConversation] = useRecoilState(selectedConversationState);
-  const userId = localStorage.getItem("userId");
-  const { userDetails, loading, error } = useUserDetails();
+  const user = localStorage.getItem("user");
+  const userObj = JSON.parse(user);
+  // const { userDetails, loading, error } = useUserDetails();
 
-  const fromMe = message.senderId === userId;
+  const fromMe = message.senderId === userObj._id;
   const chatClassName = fromMe ? "chat-end" : "chat-start";
 
   const profilePic = fromMe
-    ? userDetails?.profilePic
+    ? userObj?.profilePic
     : selectedConversation?.profilePic;
 
   const bubbleBgColor = fromMe
     ? "bg-sky-200 text-black p-2"
     : "bg-gray-800 text-white p-2 rounded-xl";
 
-  const userName = fromMe
-    ? userDetails?.username
-    : selectedConversation?.username;
+  const userName = fromMe ? userObj?.username : selectedConversation?.username;
 
   const sore = fromMe ? "flex-start" : "flex-end";
 
