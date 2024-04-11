@@ -22,7 +22,7 @@ const NotDoneTodo = ({ todo, onToggleCompleted }) => {
   // console.log("Not done tod", todo);
 
   return (
-    <div className="flex hover:bg-oran-700 shadow-md font-AlbertSans p-2 mx-6 my-5 border-2 border-gray-200 border-solid rounded-xl cursor-pointer relative">
+    <div className="flex hover:bg-oran-700 shadow-md font-AlbertSans p-2 mx-6 my-5 border-2 border-gray-200 border-solid rounded-xl cursor-pointer relative" >
       <div className="m-2 pt-0.5">
         <label className="inline-flex items-center">
           <input
@@ -32,7 +32,7 @@ const NotDoneTodo = ({ todo, onToggleCompleted }) => {
           />
         </label>
       </div>
-      <div className="mx-2 flex-grow">
+      <div className="mx-2 flex-grow" onClick={onToggleCompleted}>
         <div id="check" className="my-1">
           <h2 className="font-medium text-2xl">{todo.title}</h2>
         </div>

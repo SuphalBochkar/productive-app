@@ -2,6 +2,9 @@ import React, { useEffect, useRef } from "react";
 import useGetMessages from "../../hooks/useGetMessages";
 import useListenMessages from "../../hooks/UseListenMessages";
 import Message from "./Message";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import ReactLoadingSkeleton from "react-loading-skeleton";
+import ConversationSkeleton from "./ConversationSkeleton";
 
 const SingleConversation = () => {
   const { messages, loading } = useGetMessages();
@@ -16,6 +19,9 @@ const SingleConversation = () => {
 
   return (
     <div className="px-4 flex-1 overflow-auto">
+
+      {loading && <ConversationSkeleton n={3}/>}
+
       {!loading &&
         messages.length > 0 &&
         messages.map((message) => (

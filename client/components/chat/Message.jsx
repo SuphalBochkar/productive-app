@@ -35,18 +35,18 @@ const Message = ({ message }) => {
         <div className="flex justify-end">
           <div class="flex items-end gap-2.5 m-3 max-w-[1000px]">
             <div
-              className={`flex flex-col w-full max-w-[700px] leading-1.5 p-4 border-gray-200 bg-[#005c4b] rounded-e-xl rounded-es-xl dark:bg-gray-700`}
+              className={`flex flex-col w-full max-w-[600px] leading-1.5 p-4 border-gray-200  bg-[#6161ff] rounded-e-xl rounded-xl`}
               style={{ overflowWrap: "break-word" }}
             >
               <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                <span class="text-sm font-semibold text-gray-900 dark:text-white">
+                <span class="text-sm font-semibold text-white ">
                   {userName}
                 </span>
-                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                <span class="text-sm font-normal text-gray-200 ">
                   {formattedTime}
                 </span>
               </div>
-              <div class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
+              <div class="text-sm font-normal py-2.5 text-white ">
                 {message.message}
               </div>
             </div>
@@ -65,17 +65,17 @@ const Message = ({ message }) => {
             alt="Jese image"
           ></img>
           <div
-            className={`flex flex-col w-full max-w-[200px] leading-1.5 p-4 border-gray-200 rounded-e-xl rounded-es-xl bg-[#005c4b] dark:bg-gray-700`}
+            className={`flex flex-col w-full max-w-[200px] leading-1.5 p-4 border-gray-200 rounded-e-xl rounded-xl bg-[#3a3a3a]`}
           >
             <div class="flex items-center space-x-2 rtl:space-x-reverse">
-              <span class="text-sm font-semibold text-gray-900 dark:text-white">
+              <span class="text-sm font-semibold text-gray-100 ">
                 {userName}
               </span>
-              <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+              <span class="text-sm font-normal text-white">
                 {formattedTime}
               </span>
             </div>
-            <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
+            <p class="text-sm font-normal py-2.5 text-gray-100 ">
               {message.message}
             </p>
           </div>

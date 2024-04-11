@@ -11,6 +11,8 @@ import MySpace from "../pages/MySpace";
 import Test from "../pages/Test";
 import TempSignout from "../pages/TempSignout";
 import UserChat from "../pages/UserChat";
+import Calendar from "../pages/Calendar";
+import Trash from "../pages/Trash";
 
 function App() {
   const { authUser } = useAuthContext();
@@ -39,6 +41,8 @@ function App() {
         <Route path="/test" element={<Test />} />
         <Route path="/signout" element={<TempSignout />} />
         <Route path="/chat" element={<UserChat />} />
+        <Route path="/calendar" element={<Calendar/>}/>
+        <Route path="/trash" element = {<Trash/>}/>
       </Routes>
       <Toaster />
     </>

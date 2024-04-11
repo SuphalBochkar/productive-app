@@ -5,6 +5,9 @@ import Todocomp from "./Todocomp";
 import useTodos from "../../hooks/useTodos";
 import { useRecoilState } from "recoil";
 import { currentTodosSelector } from "../../store/selectors";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import TodoSkeleton from "./TodoSkeleton";
 
 const Rightmain = ({ handleTodoClick }) => {
   const { todos, loading, error } = useTodos();
@@ -22,7 +25,9 @@ const Rightmain = ({ handleTodoClick }) => {
         className="w-full overflow-y-auto"
         style={{ maxHeight: `calc(100vh - 16rem)` }}
       >
-        {loading && <div>Loading ...</div>}
+        {/* {loading && <div>Loading ...</div>} */}
+        {/* {loading && <Skeleton count={5} />} */}
+        {loading && <TodoSkeleton n={5} />}
         {error && <div>Error: {error}</div>}
         {!loading &&
           currentTodos.map((todo) => (
