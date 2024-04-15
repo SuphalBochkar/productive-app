@@ -11,6 +11,7 @@ const {
 const { signUpMiddleware } = require("../middleware/signup");
 const { signInMiddleware } = require("../middleware/signin");
 const authMiddleware = require("../middleware/authControl");
+const userDB = require("../models/userModel");
 const router = express.Router();
 
 router.post("/signup", signUpMiddleware, signup);
