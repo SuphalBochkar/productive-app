@@ -1,0 +1,1 @@
+import{j as r}from"./index-DvsKKoBf.js";import{S as t}from"./Sidebar-BXM-FkFG.js";import"./SubscriptionInfo-B1Ca5dhZ.js";const f=()=>r.jsx(r.Fragment,{children:r.jsx("div",{className:"font-AlbertSans w-[20rem] left-0 top-0 fixed h-full bg-[#f3f4f6]",children:r.jsx(t,{})})});export{f as default};
