@@ -21,5 +21,8 @@ router.get("/me", authMiddleware, detailsOfUser);
 router.get("/test", (req, res) => {
   res.send("User routes test");
 });
+router.post("/test", (req, res) => {
+  res.json({ msg: "User routes test" });
+});
 
 module.exports = router;
