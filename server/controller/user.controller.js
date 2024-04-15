@@ -5,7 +5,7 @@ const signup = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    const profilePic = `https://api.dicebear.com/8.x/lorelei/svg?seed=${req.body.username}`;
+    const profilePic = `https://api.dicebear.com/8.x/lorelei/svg?seed=${req.body.email}`;
     const newUser = await userDB.create({
       username: username,
       email: email,

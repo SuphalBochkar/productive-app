@@ -6,7 +6,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5000"], // Allowing requests from this origin
+    origin: ["http://localhost:5173"], // Allowing requests from this origin
     methods: ["GET", "POST"], // Allowing only specified HTTP methods
   },
 });

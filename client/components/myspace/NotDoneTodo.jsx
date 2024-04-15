@@ -8,6 +8,8 @@ import pencil from "../../src/assets/pencil.svg";
 import del from "../../src/assets/delete.svg";
 import { sidebarToggleState, taskDetailsState } from "../../store/atoms";
 import { useRecoilState } from "recoil";
+import useDeleteTodo from "../../hooks/useDeleteTodo";
+import toast from "react-hot-toast";
 
 const NotDoneTodo = ({ todo, onToggleCompleted }) => {
   const [sidebarToggle, setSidebarToggle] = useRecoilState(sidebarToggleState);
@@ -15,14 +17,30 @@ const NotDoneTodo = ({ todo, onToggleCompleted }) => {
 
   const editHandle = () => {
     setSidebarToggle("edit");
-    setTaskDetails({});
     setTaskDetails(todo);
   };
 
-  // console.log("Not done tod", todo);
+  const formattedDueDate = new Date(todo.dueDate).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+
+  const { deleteTodo } = useDeleteTodo();
+
+  // deleteTodo(todo);
+  const handleDelete = async () => {
+    const { success, message } = await deleteTodo(todo);
+    if (success) {
+      toast.success(message);
+      setSidebarToggle("none");
+    } else {
+      toast.error(message);
+    }
+  };
 
   return (
-    <div className="flex hover:bg-oran-700 shadow-md font-AlbertSans p-2 mx-6 my-5 border-2 border-gray-200 border-solid rounded-xl cursor-pointer relative" >
+    <div className="flex hover:bg-oran-700 shadow-md font-AlbertSans p-2 mx-6 my-5 border-2 border-gray-200 border-solid rounded-xl cursor-pointer relative">
       <div className="m-2 pt-0.5">
         <label className="inline-flex items-center">
           <input
@@ -37,11 +55,11 @@ const NotDoneTodo = ({ todo, onToggleCompleted }) => {
           <h2 className="font-medium text-2xl">{todo.title}</h2>
         </div>
         <div className="flex gap-3 my-3">
-          <Todoinfo label={"5"} svg={atta} />
-          <span className="text-[#aeafaf]">•</span>
-          <Todoinfo label={"12"} svg={comm} />
-          <span className="text-[#aeafaf]">•</span>
-          <Todoinfo label={"22 Jan 2023"} svg={cal} />
+          {/* <Todoinfo label={"5"} svg={atta} /> */}
+          {/* <span className="text-[#aeafaf]">•</span> */}
+          {/* <Todoinfo label={"12"} svg={comm} /> */}
+          {/* <span className="text-[#aeafaf]">•</span> */}
+          <Todoinfo label={formattedDueDate} svg={cal} />
         </div>
         <div className="flex mb-2 gap-5">
           <Tasktype type={todo.taskTypeName} />
@@ -66,6 +84,7 @@ const NotDoneTodo = ({ todo, onToggleCompleted }) => {
           <button
             type="button"
             className="focus:outline-none text-gray-700 bg-red-200 hover:bg-red-400 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-200 dark:hover:bg-red-400 dark:focus:ring-red-500"
+            onClick={() => handleDelete()}
           >
             Delete
           </button>

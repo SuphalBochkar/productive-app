@@ -16,26 +16,27 @@ export const SocketContextProvider = ({ children }) => {
   const userObj = JSON.parse(user);
   const userId = userObj?._id;
 
-  // useEffect(() => {
-  //   if (userId) {
-  //     const socket = io("http://localhost:3000", {
-  //       // Connect to your Socket.io server running on port 5000
-  //       query: {
-  //         userId: userId,
-  //       },
-  //     });
-  //     setSocket(socket);
-  //     socket.on("getOnlineUsers", (users) => {
-  //       setOnlineUsers(users);
-  //     });
-  //     return () => socket.close();
-  //   } else {
-  //     if (socket) {
-  //       socket.close();
-  //       setSocket(null);
-  //     }
-  //   }
-  // }, [userId]);
+  useEffect(() => {
+    if (userId) {
+      const socket = io("http://localhost:3000/", {
+        // Connect to your Socket.io server running on port 5000
+        query: {
+          userId: userId,
+        },
+      });
+      setSocket(socket);
+      socket.on("getOnlineUsers", (users) => {
+        setOnlineUsers(users);
+        console.log("OnlineUsers", users);
+      });
+      return () => socket.close();
+    } else {
+      if (socket) {
+        socket.close();
+        setSocket(null);
+      }
+    }
+  }, []);
 
   return (
     <SocketContext.Provider value={{ socket, onlineUsers }}>

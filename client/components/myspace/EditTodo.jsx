@@ -5,16 +5,21 @@ import TaskDetailsInfo from "./TaskDetailsInfo";
 import Attachment from "./Attachment";
 import Comments from "./Comments";
 import TaskInput from "./TodoInput/TaskInput";
-import { useRecoilState, useSetRecoilState } from "recoil"; // Import useSetRecoilState
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { sidebarToggleState, taskDetailsState } from "../../store/atoms";
+import useEditTodo from "../../hooks/useEditTodo";
+import toast from "react-hot-toast";
+import { currentTodosSelector } from "../../store/selectors";
 
 const EditTodo = () => {
   const [sidebarToggle, setSidebarToggle] = useRecoilState(sidebarToggleState);
   const [taskDetails, setTaskDetails] = useRecoilState(taskDetailsState);
+  const [currentTodos, setCurrentTodos] = useRecoilState(currentTodosSelector);
 
   const [title, setTitle] = useState(taskDetails.title);
   const [description, setDescription] = useState("Edit Details");
   const [time, setTime] = useState("");
+  const [status, setStatus] = useState("");
   const [type, setType] = useState("");
 
   useEffect(() => {
@@ -24,32 +29,34 @@ const EditTodo = () => {
 
   const cancelHandle = () => {
     setSidebarToggle("none");
-};
+  };
+  const { editTodo } = useEditTodo();
+  const handleEdit = async () => {
+    const updatedTodoData = {
+      title,
+      description,
+      time,
+      status,
+      type,
+    };
+    const { success, message } = await editTodo(
+      taskDetails._id,
+      updatedTodoData
+    );
 
-  const saveTodo = async () => {
-    try {
-      const todoId = taskDetails._id;
-      const response = await axiosInstance.post(`/todo/update/${todoId}`, {
-        title: title,
-      });
-      console.log(response.data);
-      toast.success(response.data.message);
-    } catch (error) {
-      if (error.response) {
-        toast.error(error.response.data.message || "An error occurred", {
-          duration: 600,
-        });
-      } else if (error.request) {
-        toast.error("No response received from server", {
-          duration: 600,
-        });
-      } else {
-        toast.error("Error: " + error.message, {
-          duration: 600,
-        });
-      }
-    } finally {
-      setLoading(false);
+    if (success) {
+      setCurrentTodos((prevTodos) =>
+        prevTodos.map((todoItem) => {
+          if (todoItem._id === taskDetails._id) {
+            return taskDetails;
+          }
+          return todoItem;
+        })
+      );
+      toast.success(message);
+      setSidebarToggle("none");
+    } else {
+      toast.error(message);
     }
   };
 
@@ -57,13 +64,14 @@ const EditTodo = () => {
     <>
       <div className="p-4 w-[30rem] h-full relative font-AlbertSans transition">
         <div className="flex justify-between items-center">
-          <h3 className="text-3xl">Task Details</h3>
+          <h3 className="text-3xl">Edit Task Details</h3>
           <div>
             <button
               type="button"
               className="text-white bg-[#6161ff] hover:bg-[#4f4ff5] focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              onClick={() => handleEdit()}
             >
-              Save
+              Edit
             </button>
             <button
               type="button"

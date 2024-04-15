@@ -6,10 +6,13 @@ const userDB = require("../models/userModel");
 const authMiddleware = async (req, res, next) => {
   try {
     //! -------------Server Client JWT------------------
+    //& Both server and client
+    const token = req.cookies?.jwt || req.headers?.authorization;
+
     //& Server
     // const token = req.cookies.jwt;
     // & Client
-    const token = req.headers.authorization; // Get the token from request headers
+    // const token = req.headers.authorization; // Get the token from request headers
     //! -------------Server Client JWT------------------
 
     console.log("Token:", token); // Debugging statement
@@ -22,9 +25,9 @@ const authMiddleware = async (req, res, next) => {
 
     //! -------------Server Client JWT------------------
     //& Server
-    // const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     //& Client
-    const decoded = jwt.verify(token.split(" ")[1], process.env.JWT_SECRET); // Split the token to remove "Bearer"
+    // const decoded = jwt.verify(token.split(" ")[1], process.env.JWT_SECRET); // Split the token to remove "Bearer"
     //! -------------Server Client JWT------------------
 
     console.log("Decoded:", decoded); // Debugging statement

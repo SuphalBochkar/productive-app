@@ -33,49 +33,49 @@ const Message = ({ message }) => {
     <>
       {fromMe ? (
         <div className="flex justify-end">
-          <div class="flex items-end gap-2.5 m-3 max-w-[1000px]">
+          <div className="flex items-end gap-2.5 m-3 max-w-[1000px]">
             <div
               className={`flex flex-col w-full max-w-[600px] leading-1.5 p-4 border-gray-200  bg-[#6161ff] rounded-e-xl rounded-xl`}
               style={{ overflowWrap: "break-word" }}
             >
-              <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                <span class="text-sm font-semibold text-white ">
+              <div className="flex items-center space-x-2 rtl:space-x-reverse">
+                <span className="text-sm font-semibold text-white ">
                   {userName}
                 </span>
-                <span class="text-sm font-normal text-gray-200 ">
+                <span className="text-sm font-normal text-gray-200 ">
                   {formattedTime}
                 </span>
               </div>
-              <div class="text-sm font-normal py-2.5 text-white ">
+              <div className="text-sm font-normal py-2.5 text-white ">
                 {message.message}
               </div>
             </div>
             <img
-              class="w-8 h-8 rounded-full"
+              className="w-8 h-8 rounded-full"
               src={profilePic}
-              alt="Jese image"
+              alt="image"
             ></img>
           </div>
         </div>
       ) : (
-        <div class="flex items-start gap-2.5 m-3">
+        <div className="flex items-start gap-2.5 m-3">
           <img
-            class="w-8 h-8 rounded-full"
+            className="w-8 h-8 rounded-full"
             src={profilePic}
-            alt="Jese image"
+            alt="image"
           ></img>
           <div
             className={`flex flex-col w-full max-w-[200px] leading-1.5 p-4 border-gray-200 rounded-e-xl rounded-xl bg-[#3a3a3a]`}
           >
-            <div class="flex items-center space-x-2 rtl:space-x-reverse">
-              <span class="text-sm font-semibold text-gray-100 ">
+            <div className="flex items-center space-x-2 rtl:space-x-reverse">
+              <span className="text-sm font-semibold text-gray-100 ">
                 {userName}
               </span>
-              <span class="text-sm font-normal text-white">
+              <span className="text-sm font-normal text-white">
                 {formattedTime}
               </span>
             </div>
-            <p class="text-sm font-normal py-2.5 text-gray-100 ">
+            <p className="text-sm font-normal py-2.5 text-gray-100 ">
               {message.message}
             </p>
           </div>

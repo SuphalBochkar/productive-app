@@ -114,13 +114,6 @@ import EditTodo from "../components/myspace/EditTodo";
 import AddTodo from "../components/myspace/AddTodo";
 
 const Myspace = () => {
-  // const [isOpen, setIsOpen] = useState(true);
-  // const TaskDetailstoggle = () => setIsOpen(!isOpen);
-  // const [taskDetails, setTaskDetails] = useState({
-  //   label: "Documenting on github",
-  //   des: "All info",
-  // });
-
   const [sidebarToggle, setSidebarToggle] = useRecoilState(sidebarToggleState);
   return (
     <>

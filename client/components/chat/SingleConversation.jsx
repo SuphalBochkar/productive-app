@@ -19,8 +19,7 @@ const SingleConversation = () => {
 
   return (
     <div className="px-4 flex-1 overflow-auto">
-
-      {loading && <ConversationSkeleton n={3}/>}
+      {loading && <ConversationSkeleton n={3} />}
 
       {!loading &&
         messages.length > 0 &&

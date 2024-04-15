@@ -22,7 +22,21 @@ const useSendMessage = () => {
       // Assuming messages is an array of messages
       // Replace this logic with your own, depending on how you manage messages
       // Append the new message to the existing messages array
-      setMessages((prevMessages) => [...prevMessages, data]);
+      // setMessages((prevMessages) => [...prevMessages, data]);
+
+      // setMessages((prevMessages) => {
+      //   if (!prevMessages || prevMessages.length === 0) {
+      //     return [data];
+      //   } else {
+      //     return [...prevMessages, data];
+      //   }
+      // });
+      const updatedMessages = Array.isArray(messages)
+        ? [...messages, data]
+        : [data];
+
+      // Set the messages state directly
+      setMessages(updatedMessages);
     } catch (error) {
       toast.error(error.message);
     } finally {

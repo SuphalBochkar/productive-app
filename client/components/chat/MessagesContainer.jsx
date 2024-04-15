@@ -5,6 +5,7 @@ import { selectedConversationState } from "../../store/atoms";
 import useUserDetails from "../../hooks/useUserDetails";
 import SingleConversation from "./SingleConversation";
 import MessageInput from "./MessageInput";
+import { useSocketContext } from "../../context/SocketContext";
 
 const MessagesContainer = () => {
   const [selectedConversation, setSelectedConversation] = useRecoilState(
@@ -16,6 +17,9 @@ const MessagesContainer = () => {
     return () => setSelectedConversation([]);
   }, [setSelectedConversation]);
 
+  const { onlineUsers } = useSocketContext();
+  const isOnline = (userId) => onlineUsers.includes(userId);
+
   return (
     <div className="w-full flex flex-col">
       {selectedConversation.length === 0 ? (
@@ -23,9 +27,14 @@ const MessagesContainer = () => {
       ) : (
         <>
           <div className="p-4 bg-gray-300 flex items-center">
-            <img src={selectedConversation.profilePic} className="h-16" alt="" />
+            <img
+              src={selectedConversation.profilePic}
+              className="h-16"
+              alt=""
+            />
             <span className="text-gray-900 text-2xl font-bold ml-2">
               {selectedConversation.username}
+              {isOnline(selectedConversation._id) ? "Online" : "Offline"}
             </span>
           </div>
           <SingleConversation />

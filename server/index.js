@@ -5,7 +5,10 @@ const connectToDataBase = require("./db/database");
 require("dotenv").config();
 
 const mainRouter = require("./routes/main.routes");
-const app = express();
+// const app = express();
+const { app, server } = require("./socket/socketIo.js");
+
+// const app = require("./socket/socketIo");
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
@@ -21,7 +24,7 @@ app.use(cookieParser());
 app.use(cors());
 app.use("/api/v1", mainRouter);
 
-app.listen(port, async () => {
+server.listen(port, async () => {
   console.log("Connecting to database....");
   await connectToDataBase();
   console.log(`Connected to http://localhost:${port}`);

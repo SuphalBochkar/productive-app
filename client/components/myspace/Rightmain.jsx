@@ -9,10 +9,8 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import TodoSkeleton from "./TodoSkeleton";
 
-const Rightmain = ({ handleTodoClick }) => {
+const Rightmain = () => {
   const { todos, loading, error } = useTodos();
-  // console.log("Use todo", todos);
-
   const [currentTodos, setCurrentTodos] = useRecoilState(currentTodosSelector);
 
   return (
@@ -27,7 +25,7 @@ const Rightmain = ({ handleTodoClick }) => {
       >
         {/* {loading && <div>Loading ...</div>} */}
         {/* {loading && <Skeleton count={5} />} */}
-        {loading && <TodoSkeleton n={5} />}
+        {loading && <TodoSkeleton n={4} />}
         {error && <div>Error: {error}</div>}
         {!loading &&
           currentTodos.map((todo) => (
