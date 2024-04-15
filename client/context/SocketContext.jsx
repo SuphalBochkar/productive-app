@@ -15,10 +15,11 @@ export const SocketContextProvider = ({ children }) => {
   const user = localStorage.getItem("user");
   const userObj = JSON.parse(user);
   const userId = userObj?._id;
+  const baseURL = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 
   useEffect(() => {
     if (userId) {
-      const socket = io("http://localhost:3000/", {
+      const socket = io(baseURL, {
         // Connect to your Socket.io server running on port 5000
         query: {
           userId: userId,
