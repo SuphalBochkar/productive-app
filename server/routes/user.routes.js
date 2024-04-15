@@ -16,13 +16,19 @@ const router = express.Router();
 router.post("/signup", signUpMiddleware, signup);
 router.post("/signin", signInMiddleware, signin);
 router.post("/signout", signout);
-router.get("/all", getUsers);
+router.get("/all", authMiddleware, getUsers);
 router.get("/me", authMiddleware, detailsOfUser);
 router.get("/test", (req, res) => {
   res.send("User routes test");
 });
 router.post("/test", (req, res) => {
   res.json({ msg: "User routes test" });
+});
+router.get("/getusers", async (req, res) => {
+  const users = await userDB
+    .find(query)
+    .select("_id username email profilePic");
+  res.status(200).json(users); // Return the array of users
 });
 
 module.exports = router;
