@@ -3,6 +3,7 @@ import axios from "axios"; // Import axios
 import toast from "react-hot-toast";
 import { useAuthContext } from "../context/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../services/axiosInstance.js";
 
 const TempSignout = () => {
   const { setAuthUser } = useAuthContext();
@@ -10,9 +11,7 @@ const TempSignout = () => {
 
   const signout = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/v1/user/signout"
-      );
+      const response = await axiosInstance.post("/user/signout");
       localStorage.removeItem("jwt");
       toast.success("Logged out successfully");
       setAuthUser(null);

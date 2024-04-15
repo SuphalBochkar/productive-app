@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
+import axiosInstance from "../services/axiosInstance";
 
 const useSignup = () => {
   const navigate = useNavigate();
@@ -27,15 +28,12 @@ const useSignup = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/v1/user/signup",
-        {
-          username,
-          email,
-          password,
-          confirmPassword,
-        }
-      );
+      const response = await axiosInstance.post("/user/signup", {
+        username,
+        email,
+        password,
+        confirmPassword,
+      });
       console.log(response.data);
       localStorage.setItem("jwt", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
