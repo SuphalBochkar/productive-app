@@ -26,9 +26,7 @@ router.post("/test", (req, res) => {
   res.json({ msg: "User routes test" });
 });
 router.get("/getusers", async (req, res) => {
-  const users = await userDB
-    .find(query)
-    .select("_id username email profilePic");
+  const users = await userDB.find({}).select("_id username email profilePic");
   res.status(200).json(users); // Return the array of users
 });
 
