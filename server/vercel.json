@@ -7,7 +7,9 @@
         }
     ],
     "functions": {
-        "maxDuration": 40
+        "**/*.js": {
+            "maxDuration": 5
+        }
     },
     "routes": [
         {
