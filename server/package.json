@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "DataBase.js",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "run" : "nodemon index.js"
+    "run": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",

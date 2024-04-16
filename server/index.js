@@ -21,14 +21,14 @@ app.use(cookieParser());
 //   })
 // );
 
+connectToDataBase();
 app.use(cors());
 app.get("/", (req, res) => {
-  res.send("Server is running");
+  res.status(200).send("Server is running");
 });
 app.use("/api/v1", mainRouter);
 
-server.listen(port, async () => {
-  console.log("Connecting to database....");
-  await connectToDataBase();
+server.listen(port, () => {
+  // console.log("Connecting to database....");
   console.log(`Connected to http://localhost:${port}`);
 });
