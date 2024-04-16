@@ -8,8 +8,8 @@ const Signin = () => {
       <div className="w-[80vw] h-screen">
         <LeftSignin />
       </div>
-      <div className="w-full flex justify-center px-10 py-5 ">
-        <div className="w-full flex justify-center bg-slate-50 rounded-2xl">
+      <div className="w-full flex justify-center py-3">
+        <div className="w-full flex justify-center rounded-2xl">
           <RightSignin />
         </div>
       </div>
