@@ -6,6 +6,7 @@ import useFetchUsers from "../../hooks/useFetchUsers";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import MessageSkeleton from "./MessageSkeleton";
 import { useSocketContext } from "../../context/SocketContext";
+import { extractTime } from "../../services/extractTime.js";
 
 const Conversations = () => {
   const [selectedConversation, setSelectedConversation] = useRecoilState(
@@ -46,21 +47,36 @@ const Conversations = () => {
       {conversationLoading && <MessageSkeleton n={10} />}
       {usersToDisplay.map((user) => (
         <div
-          key={user._id}
+          key={user.user._id}
           className="flex hover:bg-[#6161ff] hover:text-white hover:cursor-pointer m-1 py-3 px-5 rounded-lg items-center border border-gray-300"
-          onClick={() => handleUserSelect(user)}
+          onClick={() => handleUserSelect(user.user)}
         >
-          <div className="hidden">ID: {user._id}</div>
-          <div className="relative w-16 h-16 rounded-full mr-3 bg-gray-300 flex justify-center items-center">
-            <img className="w-14 h-14" src={user.profilePic} alt="User Img" />
-            <span
-              className={`bottom-0 left-12 absolute w-4 h-4 ${
-                isOnline(user._id) ? `bg-green-400` : `bg-red-400`
-              } border-2 border-white dark:border-gray-800 rounded-full`}
-            ></span>
+          <div className="hidden">ID: {user.user._id}</div>
+          <div className="w-max">
+            <div className="relative w-16 h-16 rounded-full mr-3 bg-gray-300 flex justify-center items-center">
+              <img
+                className="w-14 h-14"
+                src={user.user.profilePic}
+                alt="User Img"
+              />
+              <span
+                className={`bottom-0 left-12 absolute w-4 h-4 ${
+                  isOnline(user.user._id) ? `bg-green-400` : `bg-red-400`
+                } border-2 border-white dark:border-gray-800 rounded-full`}
+              ></span>
+            </div>
           </div>
-          <div className="text-lg font-bold">{toTitleCase(user.username)}</div>
-          <div className="hidden">Email: {user.email}</div>
+          <div className="w-full">
+            <div className="flex justify-between items-center">
+              <div className="text-xl font-bold">
+                {toTitleCase(user.user.username)}
+              </div>
+              {user.lastMessageTime && (
+                <div>{extractTime(user.lastMessageTime)}</div>
+              )}
+            </div>
+            {user.lastMessage && <div>{user.lastMessage}</div>}
+          </div>
         </div>
       ))}
     </div>

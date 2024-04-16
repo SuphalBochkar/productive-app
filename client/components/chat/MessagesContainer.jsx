@@ -32,10 +32,12 @@ const MessagesContainer = () => {
               className="h-16"
               alt=""
             />
-            <span className="text-gray-900 text-2xl font-bold ml-2">
-              {selectedConversation.username}
-              {isOnline(selectedConversation._id) ? "Online" : "Offline"}
-            </span>
+            <div className="text-gray-900 text-2xl font-bold ml-2 flex-col">
+              <div>{selectedConversation.username}</div>
+              <div className="text-gray-400 text-sm font-thin">
+                {isOnline(selectedConversation._id) ? "Online" : "Offline"}
+              </div>
+            </div>
           </div>
           <SingleConversation />
           <MessageInput />
@@ -51,7 +53,7 @@ const NoChatSelectedComponent = () => {
     <div className="flex items-center justify-center w-full h-full">
       <div className="px-4 text-center sm:text-lg md:text-xl text-black font-semibold flex flex-col items-center gap-2">
         <p>Welcome {userDetails?.username}</p>
-        <p>Select a chat to stsart messaging</p>
+        <p>Select a chat to start messaging</p>
       </div>
     </div>
   );
