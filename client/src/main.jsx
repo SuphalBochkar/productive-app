@@ -12,15 +12,17 @@ import Sidebar from "../components/myspace/Sidebar.jsx";
 import { SocketContextProvider } from "../context/SocketContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <AuthContextProvider>
-      <RecoilRoot>
-        {/* <CustomProvider> */}
-        <SocketContextProvider>
-          <App />
-        </SocketContextProvider>
-        {/* </CustomProvider> */}
-      </RecoilRoot>
-    </AuthContextProvider>
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <AuthContextProvider>
+        <RecoilRoot>
+          {/* <CustomProvider> */}
+          <SocketContextProvider>
+            <App />
+          </SocketContextProvider>
+          {/* </CustomProvider> */}
+        </RecoilRoot>
+      </AuthContextProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );
