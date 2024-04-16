@@ -9,4 +9,4 @@ const connectToDataBase = async () => {
   }
 };
 
-module.exports = connectToDataBase;
+module.exports = await connectToDataBase;
