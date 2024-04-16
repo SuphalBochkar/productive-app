@@ -1,1 +1,0 @@
-import{j as r}from"./index-DPfIQIJl.js";import"./atoms-CGqSVeVB.js";import"./selectors--Ta97mpY.js";import{S as s}from"./SubscriptionInfo-C3bSvrb6.js";const e=()=>r.jsx("div",{className:"bg-[#f3f4f6]",children:r.jsx(s,{})});export{e as default};
