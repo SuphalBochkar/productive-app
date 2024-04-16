@@ -26,11 +26,12 @@ router.post("/test", (req, res) => {
   res.json({ msg: "User routes test" });
 });
 router.get("/getusers", async (req, res) => {
-  // const users = await userDB.find({}).select("_id username email profilePic");
-  users = {
-    1: "client",
-  };
-  res.status(200).json(users); // Return the array of users
+  try {
+    const users = await userDB.find({}).select("_id username email profilePic");
+    res.status(200).json(users); // Return the array of users
+  } catch (err) {
+    res.status(err.code).json({ msg: err.message });
+  }
 });
 
 module.exports = router;
