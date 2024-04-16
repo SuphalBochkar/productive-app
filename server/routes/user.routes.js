@@ -27,10 +27,12 @@ router.post("/test", (req, res) => {
 });
 router.get("/getusers", async (req, res) => {
   try {
-    const users = await userDB.find({}).select("_id username email profilePic");
-    res.status(200).json(users); // Return the array of users
-  } catch (err) {
-    res.status(err.code).json({ msg: err.message });
+    const users = await userDB.find({});
+
+    res.status(200).json(users);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 

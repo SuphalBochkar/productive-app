@@ -4,6 +4,8 @@ const cookieParser = require("cookie-parser");
 const connectToDataBase = require("./db/database");
 require("dotenv").config();
 
+connectToDataBase();
+
 const mainRouter = require("./routes/main.routes");
 // const app = express();
 const { app, server } = require("./socket/socketIo.js");
@@ -21,7 +23,6 @@ app.use(cookieParser());
 //   })
 // );
 
-connectToDataBase();
 app.use(cors());
 app.get("/", (req, res) => {
   res.status(200).send("Server is running");
