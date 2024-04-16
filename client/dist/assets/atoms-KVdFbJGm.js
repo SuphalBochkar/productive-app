@@ -1,1 +1,0 @@
-import{l as e}from"./index-DvsKKoBf.js";const a=e({key:"messagesState",default:[]}),s=e({key:"searchState",default:""}),o=e({key:"selectedConversationState",default:[]}),n=e({key:"taskDetailsState",default:{}}),c=e({key:"sidebarToggleState",default:"none"}),l=e({key:"currentTodosState",default:[]});export{o as a,s as b,l as c,a as m,c as s,n as t};

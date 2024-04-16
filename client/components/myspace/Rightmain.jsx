@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import MainHeading from "./MainHeading";
 import Todocomp from "./Todocomp";
@@ -10,8 +10,8 @@ import "react-loading-skeleton/dist/skeleton.css";
 import TodoSkeleton from "./TodoSkeleton";
 
 const Rightmain = () => {
-  const { todos, loading, error } = useTodos();
   const [currentTodos, setCurrentTodos] = useRecoilState(currentTodosSelector);
+  const { todos, loading, error } = useTodos(); // Fetch todos
 
   return (
     <div className="w-full border-r-2">
@@ -23,10 +23,12 @@ const Rightmain = () => {
         className="w-full overflow-y-auto"
         style={{ maxHeight: `calc(100vh - 16rem)` }}
       >
-        {/* {loading && <div>Loading ...</div>} */}
-        {/* {loading && <Skeleton count={5} />} */}
         {loading && <TodoSkeleton n={4} />}
-        {error && <div>Error: {error}</div>}
+        {currentTodos.length === 0 && error && (
+          <div className="flex m-10 p-10 justify-center items-center text-2xl font-semibold border rounded-xl">
+            {error}
+          </div>
+        )}
         {!loading &&
           currentTodos.map((todo) => (
             <Todocomp

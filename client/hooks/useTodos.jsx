@@ -45,7 +45,7 @@ const useTodos = () => {
   }, []);
 
   console.log("Before returning", todos);
-  return { todos, loading, error };
+  return { todos, loading, error, setError };
 };
 
 export default useTodos;
