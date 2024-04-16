@@ -2,6 +2,7 @@ const conversationsDB = require("../models/conversationModel");
 const userDB = require("../models/userModel");
 const messagesDB = require("../models/messageModel");
 const { getReceiverSocketId, io } = require("../socket/socketIo");
+const { default: mongoose } = require("mongoose");
 
 // Controller function to retrieve messages for a conversation
 const getMessages = async (req, res) => {
@@ -93,26 +94,70 @@ const sendMessage = async (req, res) => {
 };
 
 // Controller function to retrieve users the current user has chatted with
+// const getMyChatsUsers = async (req, res) => {
+//   try {
+//     const loggedInUserId = req.user._id;
+//     const conversations = await conversationsDB
+//       .find({
+//         participants: loggedInUserId,
+//       })
+//       .populate("participants", "_id username email profilePic");
+
+//     // Extract unique participants from all conversations
+//     const users = conversations.reduce((acc, conversation) => {
+//       conversation.participants.forEach((participant) => {
+//         if (participant._id.toString() !== loggedInUserId.toString()) {
+//           acc.push(participant); // Push user objects into the array
+//         }
+//       });
+//       return acc;
+//     }, []);
+
+//     res.status(200).json(users); // Return the array of users
+//   } catch (error) {
+//     console.log("Error in getMyChatsUsers controller:", error.message);
+//     res.status(500).json({ message: "Internal Server Error" });
+//   }
+// };
+
 const getMyChatsUsers = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
+
     const conversations = await conversationsDB
       .find({
         participants: loggedInUserId,
       })
-      .populate("participants", "_id username email profilePic");
-
-    // Extract unique participants from all conversations
-    const users = conversations.reduce((acc, conversation) => {
-      conversation.participants.forEach((participant) => {
-        if (participant._id.toString() !== loggedInUserId.toString()) {
-          acc.push(participant); // Push user objects into the array
-        }
+      .populate({
+        path: "messages",
+        options: { sort: { createdAt: -1 }, limit: 1 }, // Sort messages by createdAt descending and limit to 1
+      })
+      .populate({
+        path: "participants",
+        select: "_id username email profilePic",
       });
-      return acc;
-    }, []);
 
-    res.status(200).json(users); // Return the array of users
+    const formattedConversations = conversations.map((conversation) => {
+      const lastMessage =
+        conversation.messages.length > 0
+          ? conversation.messages[0].message
+          : null;
+      const lastMessageTime =
+        conversation.messages.length > 0
+          ? conversation.messages[0].createdAt
+          : null;
+
+      return {
+        user: conversation.participants.filter(
+          (participant) =>
+            participant._id.toString() !== loggedInUserId.toString()
+        )[0],
+        lastMessage,
+        lastMessageTime,
+      };
+    });
+
+    res.status(200).json(formattedConversations);
   } catch (error) {
     console.log("Error in getMyChatsUsers controller:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
