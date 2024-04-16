@@ -112,7 +112,7 @@ const getUsers = async (req, res) => {
     if (search) {
       query.$or = [
         { username: { $regex: search, $options: "i" } },
-        { email: { $regex: search, $options: "i" } },
+        // { email: { $regex: search, $options: "i" } },
       ];
     } else {
       // If no search query is provided, return an empty array
