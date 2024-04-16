@@ -21,7 +21,7 @@ function App() {
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route
-          path="/"
+          path="/myspace"
           element={
             authUser ? <Navigate to="/myspace" /> : <Navigate to="/signin" />
           }
