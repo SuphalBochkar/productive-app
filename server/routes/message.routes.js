@@ -10,7 +10,7 @@ const {
 // Input User id as the params
 router.get("/message/:id", getMessages);
 router.post("/message/send/:id", sendMessage);
-
 router.get("/mychats", getMyChatsUsers);
+
 
 module.exports = router;

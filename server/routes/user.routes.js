@@ -19,6 +19,15 @@ router.post("/signin", signInMiddleware, signin);
 router.post("/signout", signout);
 router.get("/all", authMiddleware, getUsers);
 router.get("/me", authMiddleware, detailsOfUser);
+
+//
+//
+//
+//
+//
+//
+//
+//
 router.get("/test", (req, res) => {
   res.send("User routes test");
 });
