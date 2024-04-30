@@ -20,20 +20,10 @@ router.post("/signout", signout);
 router.get("/all", authMiddleware, getUsers);
 router.get("/me", authMiddleware, detailsOfUser);
 
-//
-//
-//
-//
-//
-//
-//
-//
 router.get("/test", (req, res) => {
   res.send("User routes test");
 });
-router.post("/test", (req, res) => {
-  res.json({ msg: "User routes test" });
-});
+
 router.get("/getusers", async (req, res) => {
   try {
     const users = await userDB.find({});

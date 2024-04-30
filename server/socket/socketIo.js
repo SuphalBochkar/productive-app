@@ -5,6 +5,7 @@ const clientURL = process.env.CLIENT_URL;
 
 const app = express();
 const server = http.createServer(app);
+
 const io = new Server(server, {
   cors: {
     // origin: ["http://localhost:5173"], // Allowing requests from this origin
@@ -12,13 +13,10 @@ const io = new Server(server, {
     methods: ["GET", "POST"], // Allowing only specified HTTP methods
   },
 });
-
 const getReceiverSocketId = (receiverId) => {
   return userSocketMap[receiverId];
 };
-
 const userSocketMap = {};
-
 io.on("connection", (socket) => {
   console.log("User Connected: ", socket.id);
 

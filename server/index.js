@@ -4,32 +4,23 @@ const cookieParser = require("cookie-parser");
 const connectToDataBase = require("./db/database");
 require("dotenv").config();
 
-connectToDataBase();
-
 const mainRouter = require("./routes/main.routes");
-// const app = express();
 const { app, server } = require("./socket/socketIo.js");
-
-// const app = require("./socket/socketIo");
-const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cookieParser());
-// app.use(
-//   cors({
-//     origin: [`http://localhost:${port}`],
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true,
-//   })
-// );
-
 app.use(cors());
+
 app.get("/", (req, res) => {
-  res.status(200).send("Server is running");
+  // Check if the database is connected
+  res.status(200).send("connected");
 });
+
+// Use mainRouter
 app.use("/api/v1", mainRouter);
 
-server.listen(port, () => {
-  // console.log("Connecting to database....");
-  console.log(`Connected to http://localhost:${port}`);
+connectToDataBase();
+const port = process.env.PORT || 3000;
+server.listen(port, async () => {
+  console.log(`Server is running on port ${port}`);
 });

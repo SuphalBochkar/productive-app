@@ -12,5 +12,4 @@ router.get("/message/:id", getMessages);
 router.post("/message/send/:id", sendMessage);
 router.get("/mychats", getMyChatsUsers);
 
-
 module.exports = router;
