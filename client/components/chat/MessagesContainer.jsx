@@ -20,22 +20,23 @@ const MessagesContainer = () => {
   const { onlineUsers } = useSocketContext();
   const isOnline = (userId) => onlineUsers.includes(userId);
 
+  // console.log("Selected: ", selectedConversation);
   return (
     <div className="w-full flex flex-col">
-      {selectedConversation.length === 0 ? (
+      {selectedConversation?.length === 0 ? (
         <NoChatSelectedComponent />
       ) : (
         <>
           <div className="p-4 bg-gray-300 flex items-center">
             <img
-              src={selectedConversation.profilePic}
+              src={selectedConversation?.profilePic}
               className="h-16"
               alt=""
             />
             <div className="text-gray-900 text-2xl font-bold ml-2 flex-col">
-              <div>{selectedConversation.username}</div>
+              <div>{selectedConversation?.username}</div>
               <div className="text-gray-400 text-sm font-thin">
-                {isOnline(selectedConversation._id) ? "Online" : "Offline"}
+                {isOnline(selectedConversation?._id) ? "Online" : "Offline"}
               </div>
             </div>
           </div>

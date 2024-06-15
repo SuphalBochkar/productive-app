@@ -12,7 +12,7 @@ export const searchState = atom({
 
 export const selectedConversationState = atom({
   key: "selectedConversationState",
-  default: [],
+  default: {},
 });
 
 export const taskDetailsState = atom({

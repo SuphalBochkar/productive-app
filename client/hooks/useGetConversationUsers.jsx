@@ -13,7 +13,6 @@ const useGetConversationUsers = () => {
       try {
         const response = await axiosInstance.get("/chat/mychats");
         setConversations(response.data);
-        console.log("Conver userses = ", response.data);
       } catch (error) {
         toast.error(error.message);
       } finally {
