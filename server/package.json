@@ -14,10 +14,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@finish66/common": "^1.0.2",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "docker": "^1.0.0",
+    "docker": "^0.2.14",
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
