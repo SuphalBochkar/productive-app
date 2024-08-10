@@ -8,31 +8,6 @@ The Productive Web Application is designed to significantly enhance users' produ
 
 The application is developed using a robust tech stack, including **HTML, CSS, JavaScript, Node.js,** and **Socket.IO**. This combination ensures the app is both powerful and flexible, while maintaining compatibility with modern web browsers and mobile devices. This accessibility guarantees that users can manage their tasks and communicate effectively, regardless of their platform or device.
 
-### Core Features
-
-1. **Todos:**
-   - **Task Management:** Users can add new tasks, edit existing ones, mark tasks as completed or incomplete, and view their entire task list. This feature is crucial for users who need to keep track of multiple responsibilities and ensure nothing is overlooked.
-   - **Efficiency:** By providing an easy-to-use interface, the Todos feature helps users prioritize their tasks and manage their time more effectively.
-
-2. **Messages:**
-   - **Real-time Communication:** Through the Messages feature, users can search for other users, send and receive messages instantly. This is powered by **Socket.IO**, which ensures that messages are delivered in real-time, providing a seamless communication experience.
-   - **Status Indicators:** The app includes online/offline indicators, allowing users to see whether their contacts are currently available, thus improving the overall communication efficiency.
-
-### User Experience
-
-The Productive Web Application is designed with a user-centric approach, ensuring a smooth and intuitive experience. The integration of the Todos and Messages features into a single platform allows users to manage tasks and communicate without needing to switch between different tools, making it a convenient solution for productivity.
-
-## Product Perspective
-
-The Productive Web Application is a standalone application that uniquely combines task management and messaging capabilities. Unlike many other tools that focus solely on one aspect, this app offers a balanced approach to productivity by merging both functionalities. While it stands alone, its features align with those found in well-known applications such as **Trello, Asana, Slack,** and **WhatsApp**. This comparison highlights the app's comprehensive nature, positioning it as a valuable tool for both individual and team productivity.
-
-## Product Functions
-
-The application is centered around two primary functions:
-
-- **Todos:** Users have the ability to add new tasks, edit existing ones, mark them as done or undone, and view all tasks in an organized list. This feature is designed to keep users on top of their daily activities, ensuring they can easily manage and track their workload.
-- **Messages:** This function allows users to connect with others by searching for usernames, sending messages, and receiving responses in real-time. The inclusion of status indicators enhances this feature, providing clarity on user availability.
-
 ## Detailed Feature Analysis
 
 ### 1. Todos Feature
@@ -90,4 +65,72 @@ The Messages feature is built to foster real-time communication between users, e
 
 - **User Not Found:** If the searched user cannot be located, the app informs the user and suggests refining the search criteria.
 - **Message Sending/Receiving Errors:** If there are any disruptions in sending or receiving messages, the app alerts users with an error message and advises them to try again later.
+
+
+# Contributing and Development Guide
+
+### Step 1: Application Credentials
+Use the following credentials to log in and start using the application:
+
+- **Username:** `user@gmail.com`
+- **Password:** `123456`
+
+### Step 2: Clone the Repository
+Start by cloning the repository from GitHub to your local machine using the following command:
+
+```bash
+git clone https://github.com/SuphalBochkar/productive-app.git
+```
+
+### Step 3: Navigate to the Server and Client Directories
+
+1. **Server Setup:**
+   - Navigate to the server directory:
+     ```bash
+     cd productive-app/server
+     ```
+   - Install the necessary dependencies:
+     ```bash
+     npm install
+     ```
+   - Start the backend server:
+     ```bash
+     npm start
+     ```
+
+2. **Client Setup:**
+   - Open a new terminal window and navigate to the client directory:
+     ```bash
+     cd productive-app/client
+     ```
+   - Install the necessary dependencies:
+     ```bash
+     npm install
+     ```
+   - Start the frontend:
+     ```bash
+     npm run dev
+     ```
+
+### Step 4: Access the Application
+Once both the server and client are running, open your browser and navigate to `http://localhost:5173` to access the application.
+
+### Folder Structure Overview
+
+The project is structured as follows:
+
+- **.gitignore**: Specifies files and directories to be ignored by Git.
+- **package.json**: Contains metadata about the project and dependencies for both server and client.
+- **server**: Contains backend files, including routes, models, controllers, and middleware.
+  - **index.js**: Entry point for the server.
+  - **.env**: Environment variables for the server.
+  - **routes/**: API endpoints.
+  - **models/**: Mongoose schemas.
+  - **middleware/**: Custom middleware functions.
+  - **controller/**: Business logic for handling requests.
+- **client**: Contains frontend files, including components, pages, and hooks.
+  - **src/**: Main source files for the React application.
+  - **pages/**: Different views and pages in the application.
+  - **components/**: Reusable components.
+  - **hooks/**: Custom React hooks.
 
