@@ -1,0 +1,11 @@
+# Server
+node_modules/
+.env
+.env.local
+
+# Client
+node_modules/
+
+# Common
+.vscode
+README.md
